@@ -63,7 +63,6 @@ function Login() {
         data-testid="login-submit-btn"
         type="submit"
         disabled={ on }
-        onClick={ () => (console.log('Funçao temporária btn')) }
       >
         Enter
       </Button>

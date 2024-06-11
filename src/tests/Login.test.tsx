@@ -13,8 +13,11 @@ describe('Teste para verificar o funcionamento da página de Login', () => {
     const loginSubmitBtn = screen.getByTestId('login-submit-btn');
 
     expect(loginInput).toBeInTheDocument();
+    expect(loginInput).toBeVisible();
     expect(passwordInput).toBeInTheDocument();
+    expect(passwordInput).toBeVisible();
     expect(loginSubmitBtn).toBeInTheDocument();
+    expect(loginSubmitBtn).toBeVisible();
   });
 
   test('Teste para verificar o comportamento do botão', async () => {
