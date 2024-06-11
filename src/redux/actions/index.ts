@@ -1,6 +1,7 @@
+import { SetCredentialsPayloadType } from '../../util/types';
 import { SET_CREDENTIALS } from '../../util/typos';
 
-export const setCredentials = (email: string, password: string) => ({
+export const setCredentials = ({ email, password }: SetCredentialsPayloadType) => ({
   type: SET_CREDENTIALS,
   payload: {
     email,
