@@ -5,7 +5,7 @@ import App from '../App';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 
 describe('Teste para verificar o funcionamento da página de Login', () => {
-  test('Teste para verificar a renderização dos inputs', () => {
+  test('Teste para verificar a renderização dos inputs.', () => {
     renderWithRouterAndRedux(<App />);
 
     const loginInput = screen.getByTestId('email-input');
