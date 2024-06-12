@@ -1,10 +1,12 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouterAndRedux from '../util/renderWithRouterAndRedux';
-import Meals from '../pages/Meals';
 import SearchBar from '../components/SearchBar';
 
 const user = userEvent.setup();
+const nameRadioInputTestId = 'name-search-radio';
+const searchInputTestId = 'search-input';
+const searchBtnTestId = 'exec-search-btn';
 
 describe('Testa a SearchBar', () => {
   test('1. Testa se é possivel escrever na searchBar e selecionar algum dos radioBtns', async () => {
@@ -13,9 +15,9 @@ describe('Testa a SearchBar', () => {
       route: '/meals',
     });
 
-    const nameRadioBtn = screen.getByTestId('name-search-radio');
+    const nameRadioBtn = screen.getByTestId(nameRadioInputTestId);
     await user.click(nameRadioBtn);
-    const searchInput = screen.getByTestId('search-input');
+    const searchInput = screen.getByTestId(searchInputTestId);
     await user.type(searchInput, 'Arrabiata');
   });
 
@@ -25,11 +27,11 @@ describe('Testa a SearchBar', () => {
       route: '/meals',
     });
 
-    const nameRadioBtn = screen.getByTestId('name-search-radio');
+    const nameRadioBtn = screen.getByTestId(nameRadioInputTestId);
     await user.click(nameRadioBtn);
-    const searchInput = screen.getByTestId('search-input');
+    const searchInput = screen.getByTestId(searchInputTestId);
     await user.type(searchInput, 'Arrabiata');
-    const submmitBtn = screen.getByTestId('exec-search-btn');
+    const submmitBtn = screen.getByTestId(searchBtnTestId);
     await user.click(submmitBtn);
   });
 
@@ -39,11 +41,11 @@ describe('Testa a SearchBar', () => {
       route: '/meals',
     });
 
-    const nameRadioBtn = screen.getByTestId('name-search-radio');
+    const nameRadioBtn = screen.getByTestId(nameRadioInputTestId);
     await user.click(nameRadioBtn);
-    const searchInput = screen.getByTestId('search-input');
+    const searchInput = screen.getByTestId(searchInputTestId);
     await user.type(searchInput, 'marguerita');
-    const submmitBtn = screen.getByTestId('exec-search-btn');
+    const submmitBtn = screen.getByTestId(searchBtnTestId);
     await user.click(submmitBtn);
   });
 
@@ -53,11 +55,11 @@ describe('Testa a SearchBar', () => {
       route: '/meals',
     });
 
-    const nameRadioBtn = screen.getByTestId('name-search-radio');
+    const nameRadioBtn = screen.getByTestId(nameRadioInputTestId);
     await user.click(nameRadioBtn);
-    const searchInput = screen.getByTestId('search-input');
+    const searchInput = screen.getByTestId(searchInputTestId);
     await user.type(searchInput, 'Xablau');
-    const submmitBtn = screen.getByTestId('exec-search-btn');
+    const submmitBtn = screen.getByTestId(searchBtnTestId);
     await user.click(submmitBtn);
   });
 
@@ -67,11 +69,11 @@ describe('Testa a SearchBar', () => {
       route: '/meals',
     });
 
-    const nameRadioBtn = screen.getByTestId('name-search-radio');
+    const nameRadioBtn = screen.getByTestId(nameRadioInputTestId);
     await user.click(nameRadioBtn);
-    const searchInput = screen.getByTestId('search-input');
+    const searchInput = screen.getByTestId(searchInputTestId);
     await user.type(searchInput, 'smut');
-    const submmitBtn = screen.getByTestId('exec-search-btn');
+    const submmitBtn = screen.getByTestId(searchBtnTestId);
     await user.click(submmitBtn);
   });
 });
