@@ -1,10 +1,18 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import renderWithRouterAndRedux from '../util/renderWithRouterAndRedux';
 import App from '../App';
+import Meals from '../pages/Meals';
 
-test('Farewell, front-end', () => {
-  // Este arquivo pode ser modificado ou deletado sem problemas
-  render(<App />);
-  const linkElement = screen.getByText(/TRYBE/i);
-  expect(linkElement).toBeInTheDocument();
+describe('Testa o componente Header e suas funcionalidades', () => {
+  test('1. Verifica o componente Header é renderizado corretamente.', () => {
+    renderWithRouterAndRedux(<Meals />, {
+      initialState: { loginReducer: { isAuthenticated: true }, pageReducer: { currentPage: 1 } },
+      route: '/meals',
+    });
+    const SearchBtn = screen.getByRole('img', { name: /search icon/i });
+    expect(SearchBtn).toBeVisible();
+
+    const ProfileBtn = screen.getByRole('img', { name: /profile icon/i });
+    expect(ProfileBtn).toBeVisible();
+  });
 });
