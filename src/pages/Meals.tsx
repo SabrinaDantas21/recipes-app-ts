@@ -14,10 +14,10 @@ function Meals() {
   });
 
   return (
-  <>
-    <Header />
-    <h1>Meals</h1>
-  </>
+    <>
+      <Header />
+      <h1>Meals</h1>
+    </>
   );
 }
 
