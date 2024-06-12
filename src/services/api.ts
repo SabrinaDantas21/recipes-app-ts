@@ -47,10 +47,11 @@ export const getMealByFilter = async ({
   if (radioBtnValue === firstLetter) {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchBarValue}`);
     const data = await response.json();
-    console.log(data);
-
     return verifyLength('meal', data, navigate);
   }
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+  const data = await response.json();
+  return data;
 };
 
 export const getDrinksByFilter = async ({
@@ -80,4 +81,7 @@ export const getDrinksByFilter = async ({
     const data = await response.json();
     return verifyLength('drink', data, navigate);
   }
+  const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+  const data = await response.json();
+  return data;
 };
