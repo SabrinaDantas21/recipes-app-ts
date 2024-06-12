@@ -3,14 +3,11 @@ import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Input from './Input';
 import { getDrinksByFilter, getMealByFilter } from '../services/api';
+import { SelectedPage } from '../util/types';
 
 const searchBarFilterState = {
   searchBarValue: '',
   radioBtnValue: '',
-};
-
-export type SelectedPage = {
-  page: 'meals' | 'drinks'
 };
 
 function SearchBar({ page }: SelectedPage) {

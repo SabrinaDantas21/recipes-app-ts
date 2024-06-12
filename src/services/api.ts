@@ -1,16 +1,6 @@
-import { NavigateFunction } from 'react-router-dom';
+import { APIRequestInfo } from '../util/types';
 
 const firstLetter = 'first-letter-radio';
-
-type SearchBarInfoType = {
-  radioBtnValue: string
-  searchBarValue: string
-};
-
-type APIRequestInfo = {
-  searchBarInfo: SearchBarInfoType
-  navigate: NavigateFunction
-};
 
 const verifyLength = (consumable: 'drink' | 'meal', data:any, navigate:any) => {
   if (consumable === 'drink' && data.drinks === null) {

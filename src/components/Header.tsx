@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
-import SearchBar, { SelectedPage } from './SearchBar';
+import SearchBar from './SearchBar';
+import { SelectedPage } from '../util/types';
 
 function Header({ page }: SelectedPage) {
   const { title, showSearchIcon } = useSelector((state) => state.pageReducer);
