@@ -4,8 +4,9 @@ import { useState } from 'react';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 import SearchBar from './SearchBar';
+import { SelectedPage } from '../util/types';
 
-function Header() {
+function Header({ page }: SelectedPage) {
   const { title, showSearchIcon } = useSelector((state) => state.pageReducer);
   const navigate = useNavigate();
   const [toggleSearchBar, setToggleSearchBar] = useState(false);
@@ -31,7 +32,7 @@ function Header() {
             >
               <img src={ searchIcon } alt="Search Icon" />
             </button>
-            {toggleSearchBar && <SearchBar />}
+            {toggleSearchBar && <SearchBar page={ page } />}
           </>
         )}
         <button
