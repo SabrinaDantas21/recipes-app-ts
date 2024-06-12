@@ -1,6 +1,5 @@
 import { screen } from '@testing-library/react';
 import renderWithRouterAndRedux from '../util/renderWithRouterAndRedux';
-import App from '../App';
 import Meals from '../pages/Meals';
 
 describe('Testa o componente Header e suas funcionalidades', () => {
