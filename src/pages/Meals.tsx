@@ -14,7 +14,7 @@ function Meals() {
   });
 
   return (
-    <Header />
+    <Header page="meals" />
   );
 }
 
