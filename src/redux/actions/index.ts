@@ -1,5 +1,5 @@
+import { SET_CREDENTIALS, SET_PAGE } from '../../util/typos';
 import { SetCredentialsPayloadType } from '../../util/types';
-import { SET_CREDENTIALS } from '../../util/typos';
 
 export const setCredentials = ({ email, password }: SetCredentialsPayloadType) => ({
   type: SET_CREDENTIALS,
@@ -7,4 +7,9 @@ export const setCredentials = ({ email, password }: SetCredentialsPayloadType) =
     email,
     password,
   },
+});
+
+export const setPage = (page) => ({
+  type: SET_PAGE,
+  payload: page,
 });
