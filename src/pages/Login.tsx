@@ -1,8 +1,14 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import Input from '../components/Input';
+import { setCredentials } from '../redux/actions';
 
 function Login() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [on, setOn] = useState(true);
   const [loginForm, setLoginForm] = useState({
     email: '',
@@ -13,30 +19,29 @@ function Login() {
     { target }: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name: targetName, value } = target;
-    setLoginForm({ ...loginForm, [targetName]: value });
-    formIsValid();
+    const updatedLoginForm = { ...loginForm, [targetName]: value };
+    const emailInformation = updatedLoginForm.email.split('');
+    const checkEmail = emailInformation.filter((char) => char === '@');
+
+    setLoginForm(updatedLoginForm);
+
+    const formIsValid = updatedLoginForm.password.length > 6
+        && checkEmail.length === 1
+        && updatedLoginForm.email.includes('.com');
+
+    setOn(!formIsValid);
   };
 
-  const emailInformation = loginForm.email.split('');
-  const checkEmail = emailInformation.filter((char) => char === '@');
-
-  const formIsValid = () => {
-    console.log('entrou');
-    if (
-      loginForm.password.length >= 6
-      && checkEmail.length === 1
-      && loginForm.email.includes('.com')) {
-      setOn(false);
-    } else {
-      setOn(true);
-    }
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(setCredentials(loginForm));
+    localStorage.setItem('user', JSON.stringify({ email: loginForm.email }));
+    navigate('/meals');
   };
 
   return (
     <form
-      onSubmit={ (event) => {
-        event.preventDefault();
-      } }
+      onSubmit={ handleSubmit }
     >
       <Input
         data-testid="email-input"
@@ -58,7 +63,6 @@ function Login() {
         data-testid="login-submit-btn"
         type="submit"
         disabled={ on }
-        onClick={ () => (console.log('Funçao temporária btn')) }
       >
         Enter
       </Button>
