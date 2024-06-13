@@ -3,16 +3,14 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { setPage } from '../redux/actions';
 import { setAllMealsList, setPage } from '../redux/actions';
 import Recipes from '../components/Recipes';
-import { DispatchType } from '../util/types';
+import { DispatchType, DrinkRecommendationType } from '../util/types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FilterButtons from '../components/FilterButtons';
 import { getDrinksByFilter } from '../services/api';
 import RecommendationCard from '../components/RecommendationCard';
-import { DrinkRecommendationType } from '../util/types';
 
 function Meals() {
   const dispatch: DispatchType = useDispatch();
