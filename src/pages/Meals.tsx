@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { setAllMealsList, setPage } from '../redux/actions';
 import Recipes from '../components/Recipes';
 import { DispatchType } from '../util/types';
-import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import { getDrinksByFilter } from '../services/api';
 
