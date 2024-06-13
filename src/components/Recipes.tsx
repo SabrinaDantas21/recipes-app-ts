@@ -9,9 +9,9 @@ export default function Recipes() {
     globalState.allRecipesListReducer));
 
   const filteredRecipeList = () => {
-    if (location.pathname === '/meals') {
+    if (meals.length > 0) {
       return meals.slice(0, 12);
-    } if (location.pathname === '/drinks') {
+    } if (drinks.length > 0) {
       return drinks.slice(0, 12);
     }
     return [];
@@ -19,7 +19,7 @@ export default function Recipes() {
 
   return (
     <div>
-      { meals.length > 0 && filteredRecipeList()
+      { location.pathname === '/meals' && filteredRecipeList()
         .map(({ strMeal, strMealThumb, idMeal }, index) => (
           <MenuRecipeCard
             key={ idMeal }
@@ -28,7 +28,7 @@ export default function Recipes() {
             index={ index }
           />
         ))}
-      { drinks.length > 0 && filteredRecipeList()
+      { location.pathname === '/drinks' && filteredRecipeList()
         .map(({ strDrink, strDrinkThumb, idDrink }, index) => (
           <MenuRecipeCard
             key={ idDrink }
