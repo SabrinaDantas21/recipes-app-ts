@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setPage } from '../redux/actions';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function Drinks() {
   const dispatch = useDispatch();
@@ -14,7 +15,10 @@ function Drinks() {
   });
 
   return (
-    <Header page="drinks" />
+    <>
+      <Header page="drinks" />
+      <Footer />
+    </>
   );
 }
 

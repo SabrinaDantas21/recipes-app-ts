@@ -16,5 +16,5 @@ export type APIRequestInfo = {
 };
 
 export type SelectedPage = {
-  page: 'meals' | 'drinks'
+  page?: 'meals' | 'drinks'
 };
