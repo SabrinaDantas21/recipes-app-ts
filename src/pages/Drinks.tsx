@@ -67,6 +67,7 @@ function Drinks() {
       <header>
         <Header page="drinks" />
       </header>
+      <Recipes />
       <div style={ { width: '40%' } }>
         <Carousel
           swipeable={ false }
@@ -101,8 +102,6 @@ function Drinks() {
           }) }
         </Carousel>
       </div>
-      <Header page="drinks" />
-      <Recipes />
       <Footer />
     </>
   );
