@@ -1,4 +1,4 @@
-import { APIRequestInfo, SelectedPage } from '../util/types';
+import { APIRequestInfo } from '../util/types';
 
 const firstLetter = 'first-letter-radio';
 

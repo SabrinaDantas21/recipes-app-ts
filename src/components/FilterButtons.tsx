@@ -33,14 +33,11 @@ function FilterButtons({ page }: SelectedPage) {
   }, []);
 
   const handleClick = (filter: string) => {
-    // if (filter === currentButton) {
-    // setCurrentButton('');
-    // return setCurrentList(previowsList);
-    // }
-    // setCurrentButton(filter);
-    // passar o array com os itens vindos da API pela linha de baixo
-    // const newList = previowsList.filter((item) => item.strCategory === filter);
-    // setCurrentList(newList);
+    if (filter === currentButton) {
+      setCurrentButton('');
+      return setCurrentList(previowsList);
+    }
+    setCurrentButton(filter);
   };
 
   return (
