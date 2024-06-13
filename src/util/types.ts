@@ -42,12 +42,12 @@ export type GlobalStoreType = {
 };
 
 export type MenuRecipeCardPropsType = {
+  id: string;
   image: string;
   recipeName: string;
   index: number;
 };
 
 // -----------Tipagem do Thunk -----------
-// ===== Editar quando adicionar alguma chave no estado  =====
 
 export type DispatchType = ThunkDispatch<GlobalStoreType, unknown, AnyAction>;

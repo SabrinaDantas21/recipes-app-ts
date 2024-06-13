@@ -9,9 +9,10 @@ export default function Recipes() {
     globalState.allRecipesListReducer));
 
   const filteredRecipeList = () => {
-    if (meals.length > 0) {
+    // Aqui vão as aplicações de filtros, edite conforme precisar
+    if (meals.length > 0 && location.pathname === '/meals') {
       return meals.slice(0, 12);
-    } if (drinks.length > 0) {
+    } if (drinks.length > 0 && location.pathname === '/drinks') {
       return drinks.slice(0, 12);
     }
     return [];
@@ -23,6 +24,7 @@ export default function Recipes() {
         .map(({ strMeal, strMealThumb, idMeal }, index) => (
           <MenuRecipeCard
             key={ idMeal }
+            id={ idMeal as string }
             image={ strMealThumb as string }
             recipeName={ strMeal as string }
             index={ index }
@@ -32,6 +34,7 @@ export default function Recipes() {
         .map(({ strDrink, strDrinkThumb, idDrink }, index) => (
           <MenuRecipeCard
             key={ idDrink }
+            id={ idDrink as string }
             image={ strDrinkThumb as string }
             recipeName={ strDrink as string }
             index={ index }
