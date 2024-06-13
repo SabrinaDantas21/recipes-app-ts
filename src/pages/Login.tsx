@@ -60,12 +60,11 @@ function Login() {
         required
       />
       <Button
-        data-testid="login-submit-btn"
+        dataTestidBtn="login-submit-btn"
         type="submit"
         disabled={ on }
-      >
-        Enter
-      </Button>
+        text="Enter"
+      />
     </form>
   );
 }

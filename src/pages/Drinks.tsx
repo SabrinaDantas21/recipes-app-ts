@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setPage } from '../redux/actions';
+import { setAllDrinksList, setPage } from '../redux/actions';
+import Recipes from '../components/Recipes';
+import { DispatchType } from '../util/types';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
+import FilterButtons from '../components/FilterButtons';
 import { getMealByFilter } from '../services/api';
 
 function Drinks() {
-  const dispatch = useDispatch();
+  const dispatch: DispatchType = useDispatch();
   const navigate = useNavigate();
   const [mealsRecommendation, setMealsRecommendation] = useState([]);
 
@@ -27,11 +31,16 @@ function Drinks() {
       title: 'Drinks',
       showSearchIcon: true,
     }));
+    dispatch(setAllDrinksList());
     getMealsRecommendation();
   }, []);
 
   return (
-    <Header page="drinks" />
+    <>
+      <Header page="drinks" />
+      <Recipes />
+      <Footer />
+    </>
   );
 }
 

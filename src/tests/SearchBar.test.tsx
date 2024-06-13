@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import renderWithRouterAndRedux from '../util/renderWithRouterAndRedux';
+import { renderWithRouterAndRedux } from './helpers/renderWith';
 import SearchBar from '../components/SearchBar';
 
 const user = userEvent.setup();
@@ -10,10 +10,7 @@ const searchBtnTestId = 'exec-search-btn';
 
 describe('Testa a SearchBar', () => {
   test('1. Testa se é possivel escrever na searchBar e selecionar algum dos radioBtns', async () => {
-    renderWithRouterAndRedux(<SearchBar page="meals" />, {
-      initialState: { loginReducer: { isAuthenticated: true }, pageReducer: { currentPage: 1 } },
-      route: '/meals',
-    });
+    renderWithRouterAndRedux(<SearchBar page="meals" />);
 
     const nameRadioBtn = screen.getByTestId(nameRadioInputTestId);
     await user.click(nameRadioBtn);
@@ -22,10 +19,7 @@ describe('Testa a SearchBar', () => {
   });
 
   test('2. Testa a pesquisa a partr da pagina de "meals"', async () => {
-    renderWithRouterAndRedux(<SearchBar page="meals" />, {
-      initialState: { loginReducer: { isAuthenticated: true }, pageReducer: { currentPage: 1 } },
-      route: '/meals',
-    });
+    renderWithRouterAndRedux(<SearchBar page="meals" />);
 
     const nameRadioBtn = screen.getByTestId(nameRadioInputTestId);
     await user.click(nameRadioBtn);
@@ -36,10 +30,7 @@ describe('Testa a SearchBar', () => {
   });
 
   test('3. Testa a pesquisa a partr da pagina de "drinks"', async () => {
-    renderWithRouterAndRedux(<SearchBar page="drinks" />, {
-      initialState: { loginReducer: { isAuthenticated: true }, pageReducer: { currentPage: 1 } },
-      route: '/meals',
-    });
+    renderWithRouterAndRedux(<SearchBar page="drinks" />);
 
     const nameRadioBtn = screen.getByTestId(nameRadioInputTestId);
     await user.click(nameRadioBtn);
@@ -50,10 +41,7 @@ describe('Testa a SearchBar', () => {
   });
 
   test('4. Testa se a pagina solta um alert quando pesquisar um item que não exista', async () => {
-    renderWithRouterAndRedux(<SearchBar page="meals" />, {
-      initialState: { loginReducer: { isAuthenticated: true }, pageReducer: { currentPage: 1 } },
-      route: '/meals',
-    });
+    renderWithRouterAndRedux(<SearchBar page="meals" />);
 
     const nameRadioBtn = screen.getByTestId(nameRadioInputTestId);
     await user.click(nameRadioBtn);
@@ -64,10 +52,7 @@ describe('Testa a SearchBar', () => {
   });
 
   test('5. Testa mudança de pagina caso só encontre uma bebida com aquele nome', async () => {
-    renderWithRouterAndRedux(<SearchBar page="drinks" />, {
-      initialState: { loginReducer: { isAuthenticated: true }, pageReducer: { currentPage: 1 } },
-      route: '/meals',
-    });
+    renderWithRouterAndRedux(<SearchBar page="drinks" />);
 
     const nameRadioBtn = screen.getByTestId(nameRadioInputTestId);
     await user.click(nameRadioBtn);
