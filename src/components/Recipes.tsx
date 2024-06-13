@@ -1,10 +1,13 @@
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import { GlobalStoreType } from '../util/types';
 import MenuRecipeCard from './MenuRecipeCard';
+import FilterButtons from './FilterButtons';
 
 export default function Recipes() {
   const location = useLocation();
+  const [activeFilter, setActiveFilter] = useState('');
   const { meals, drinks } = useSelector((globalState: GlobalStoreType) => (
     globalState.allRecipesListReducer));
 
@@ -19,27 +22,41 @@ export default function Recipes() {
   };
 
   return (
-    <div>
-      { location.pathname === '/meals' && filteredRecipeList()
-        .map(({ strMeal, strMealThumb, idMeal }, index) => (
-          <MenuRecipeCard
-            key={ idMeal }
-            id={ idMeal as string }
-            image={ strMealThumb as string }
-            recipeName={ strMeal as string }
-            index={ index }
-          />
-        ))}
-      { location.pathname === '/drinks' && filteredRecipeList()
-        .map(({ strDrink, strDrinkThumb, idDrink }, index) => (
-          <MenuRecipeCard
-            key={ idDrink }
-            id={ idDrink as string }
-            image={ strDrinkThumb as string }
-            recipeName={ strDrink as string }
-            index={ index }
-          />
-        ))}
-    </div>
+    <>
+      <div>
+        { location.pathname === '/meals'
+          ? <FilterButtons
+              page="meals"
+              activeFilter={ activeFilter }
+              setActiveFilter={ setActiveFilter }
+          /> : <FilterButtons
+            page="drinks"
+            activeFilter={ activeFilter }
+            setActiveFilter={ setActiveFilter }
+          />}
+      </div>
+      <div>
+        { location.pathname === '/meals' && filteredRecipeList()
+          .map(({ strMeal, strMealThumb, idMeal }, index) => (
+            <MenuRecipeCard
+              key={ idMeal }
+              id={ idMeal as string }
+              image={ strMealThumb as string }
+              recipeName={ strMeal as string }
+              index={ index }
+            />
+          ))}
+        { location.pathname === '/drinks' && filteredRecipeList()
+          .map(({ strDrink, strDrinkThumb, idDrink }, index) => (
+            <MenuRecipeCard
+              key={ idDrink }
+              id={ idDrink as string }
+              image={ strDrinkThumb as string }
+              recipeName={ strDrink as string }
+              index={ index }
+            />
+          ))}
+      </div>
+    </>
   );
 }

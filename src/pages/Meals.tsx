@@ -38,7 +38,6 @@ function Meals() {
   return (
     <>
       <Header page="meals" />
-      <FilterButtons page="meals" />
       <Recipes />
       <Footer />
     </>

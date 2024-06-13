@@ -10,7 +10,11 @@ import {
   SetCredentialsPayloadType,
   SetPagePayloadType,
 } from '../../util/types';
-import { getDrinksByFilter, getMealByFilter } from '../../services/api';
+import {
+  getDrinksByFilter,
+  getDrinksFilteredListByCategory,
+  getMealByFilter,
+  getMealsFilteredListByCategory } from '../../services/api';
 
 export const setCredentials = ({ email, password }: SetCredentialsPayloadType) => ({
   type: SET_CREDENTIALS,
@@ -30,14 +34,19 @@ export const setMealsListAction = (data: MealObjectType[]) => ({
   payload: data,
 });
 
-export const setAllMealsList = () => {
+export const setAllMealsList = (category = '') => {
   const currentInfo = {
     searchBarInfo: { searchBarValue: '', radioBtnValue: 'name-radio' },
   };
   return async (dispatch: DispatchType) => {
     try {
-      const data = await getMealByFilter(currentInfo);
-      dispatch(setMealsListAction(data.meals));
+      if (category !== '') {
+        const data = await getMealsFilteredListByCategory(category);
+        dispatch(setMealsListAction(data.meals));
+      } else {
+        const data = await getMealByFilter(currentInfo);
+        dispatch(setMealsListAction(data.meals));
+      }
     } catch (error: any) {
       console.log(error.message);
     }
@@ -49,14 +58,19 @@ export const setDrinksListAction = (data: MealObjectType[]) => ({
   payload: data,
 });
 
-export const setAllDrinksList = () => {
+export const setAllDrinksList = (category = '') => {
   const currentInfo = {
     searchBarInfo: { searchBarValue: '', radioBtnValue: 'name-radio' },
   };
   return async (dispatch: DispatchType) => {
     try {
-      const data = await getDrinksByFilter(currentInfo);
-      dispatch(setDrinksListAction(data.drinks));
+      if (category !== '') {
+        const data = await getDrinksFilteredListByCategory(category);
+        dispatch(setDrinksListAction(data.drinks));
+      } else {
+        const data = await getDrinksByFilter(currentInfo);
+        dispatch(setDrinksListAction(data.drinks));
+      }
     } catch (error: any) {
       console.log(error.message);
     }

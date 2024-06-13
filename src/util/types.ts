@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 
@@ -46,6 +47,27 @@ export type MenuRecipeCardPropsType = {
   image: string;
   recipeName: string;
   index: number;
+};
+
+export type SingleFilterType = {
+  strCategory: string
+};
+
+export type FilterButtonsType = {
+  page: 'drinks' | 'meals'
+  setActiveFilter: Dispatch<SetStateAction<string>>
+  activeFilter: string
+};
+
+export type ButtonType = {
+  type?: 'button' | 'reset' | 'submit' | undefined
+  dataTestid?: string
+  dataTestidBtn?: string
+  onClick?: () => void
+  src?: string
+  alt?: string
+  disabled?: boolean
+  text?: string
 };
 
 // -----------Tipagem do Thunk -----------

@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import drinkIcon from '../../images/drinkIcon.svg';
 import mealIcon from '../../images/mealIcon.svg';
 import styles from './Footer.module.css';
+import Button from '../Button';
 
 function Footer() {
   const navigate = useNavigate();
@@ -15,25 +16,19 @@ function Footer() {
       data-testid="footer"
       className={ styles.footer }
     >
-      <button
+      <Button
+        dataTestid="drinks-bottom-btn"
         onClick={ () => handleCLick('/drinks') }
-      >
-        <img
-          data-testid="drinks-bottom-btn"
-          src={ drinkIcon }
-          alt="drinkIcon"
-        />
-      </button>
+        src={ drinkIcon }
+        alt="drinkIcon"
+      />
 
-      <button
+      <Button
+        dataTestid="meals-bottom-btn"
         onClick={ () => handleCLick('/meals') }
-      >
-        <img
-          data-testid="meals-bottom-btn"
-          src={ mealIcon }
-          alt="mealIcon"
-        />
-      </button>
+        src={ mealIcon }
+        alt="mealIcon"
+      />
     </footer>
   );
 }

@@ -4,10 +4,12 @@ import { useState } from 'react';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 import SearchBar from './SearchBar';
-import { SelectedPage } from '../util/types';
+import { GlobalStoreType, SelectedPage } from '../util/types';
+import Button from './Button';
 
 function Header({ page }: SelectedPage) {
-  const { title, showSearchIcon } = useSelector((state) => state.pageReducer);
+  const { title,
+    showSearchIcon } = useSelector((state: GlobalStoreType) => state.pageReducer);
   const navigate = useNavigate();
   const [toggleSearchBar, setToggleSearchBar] = useState(false);
 
@@ -25,23 +27,21 @@ function Header({ page }: SelectedPage) {
       <div>
         {showSearchIcon && (
           <>
-            <button
-              data-testid="search-top-btn"
-              src={ searchIcon }
+            <Button
+              dataTestid="search-top-btn"
               onClick={ handleSearchClick }
-            >
-              <img src={ searchIcon } alt="Search Icon" />
-            </button>
+              src={ searchIcon }
+              alt="Search Icon"
+            />
             {toggleSearchBar && <SearchBar page={ page } />}
           </>
         )}
-        <button
-          data-testid="profile-top-btn"
-          src={ profileIcon }
+        <Button
+          dataTestid="profile-top-btn"
           onClick={ handleClick }
-        >
-          <img src={ profileIcon } alt="Profile Icon" />
-        </button>
+          src={ profileIcon }
+          alt="Profile Icon"
+        />
       </div>
     </header>
   );

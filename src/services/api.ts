@@ -77,3 +77,15 @@ export const getFiltersList = async (page: 'meals' | 'drinks') => {
     return data;
   }
 };
+
+export const getMealsFilteredListByCategory = async (category: string) => {
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+  const data = await response.json();
+  return data;
+};
+
+export const getDrinksFilteredListByCategory = async (category: string) => {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
+  const data = await response.json();
+  return data;
+};

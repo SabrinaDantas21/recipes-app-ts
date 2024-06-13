@@ -1,20 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { getFiltersList } from '../services/api';
-import { SelectedPage } from '../util/types';
+import { DispatchType, FilterButtonsType, SingleFilterType } from '../util/types';
+import { setAllDrinksList, setAllMealsList } from '../redux/actions';
 
-type SingleFilterType = {
-  strCategory: string
-};
-
-function FilterButtons({ page }: SelectedPage) {
+function FilterButtons({ page, setActiveFilter, activeFilter }: FilterButtonsType) {
+  const dispatch: DispatchType = useDispatch();
   const [currentFilters, setCurrentFilters] = useState<SingleFilterType[]>([]);
-  // captura e salva a lista anterior aos filtros
-  // pode não ser usado caso list esteja no redux
-  const [previowsList, setPreviowsList] = useState([]);
-  // salva lista com filtro para ser renderizada
-  const [currentList, setCurrentList] = useState([]);
-  // salava o botão que esta selecionado para criar a logica de toggle
-  const [currentButton, setCurrentButton] = useState('');
 
   useEffect(() => {
     const handleListAPI = async () => {
@@ -33,11 +25,26 @@ function FilterButtons({ page }: SelectedPage) {
   }, []);
 
   const handleClick = (filter: string) => {
-    if (filter === currentButton) {
-      setCurrentButton('');
-      return setCurrentList(previowsList);
+    if (page === 'meals') {
+      if (filter === activeFilter) {
+        setActiveFilter('');
+        return dispatch(setAllMealsList());
+      }
+      setActiveFilter(filter);
+
+      return dispatch(setAllMealsList(filter));
     }
-    setCurrentButton(filter);
+
+    if (page === 'drinks') {
+      if (filter === activeFilter) {
+        setActiveFilter('');
+        return dispatch(setAllDrinksList());
+        // return setCurrentList(previowsList);
+      }
+      setActiveFilter(filter);
+
+      return dispatch(setAllDrinksList(filter));
+    }
   };
 
   return (
@@ -54,6 +61,12 @@ function FilterButtons({ page }: SelectedPage) {
           </button>
         ))
       )}
+      <button
+        data-testid="All-category-filter"
+        onClick={ () => handleClick(activeFilter) }
+      >
+        All
+      </button>
     </>
   );
 }
