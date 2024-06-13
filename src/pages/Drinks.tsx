@@ -4,13 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { setPage } from '../redux/actions';
+import { setAllDrinksList, setPage } from '../redux/actions';
+import Recipes from '../components/Recipes';
+import { DispatchType } from '../util/types';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
+import FilterButtons from '../components/FilterButtons';
 import { getMealByFilter } from '../services/api';
 import { MealRecommendationType } from '../util/types';
 import RecommendationCard from '../components/RecommendationCard';
 
 function Drinks() {
-  const dispatch = useDispatch();
+  const dispatch: DispatchType = useDispatch();
   const navigate = useNavigate();
   const [
     mealsRecommendation,
@@ -36,6 +41,7 @@ function Drinks() {
       title: 'Drinks',
       showSearchIcon: true,
     }));
+    dispatch(setAllDrinksList());
     getMealsRecommendation();
   }, []);
 
@@ -97,6 +103,9 @@ function Drinks() {
           }) }
         </Carousel>
       </div>
+      <Header page="drinks" />
+      <Recipes />
+      <Footer />
     </>
   );
 }

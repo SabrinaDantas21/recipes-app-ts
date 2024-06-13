@@ -2,42 +2,21 @@ import { APIRequestInfo } from '../util/types';
 
 const firstLetter = 'first-letter-radio';
 
-const verifyLength = (consumable: 'drink' | 'meal', data:any, navigate:any) => {
-  if (consumable === 'drink' && data.drinks === null) {
-    return window.alert('Sorry, we haven\'t found any recipes for these filters');
-  }
-
-  if (consumable === 'meal' && data.meals === null) {
-    return window.alert('Sorry, we haven\'t found any recipes for these filters');
-  }
-
-  if (consumable === 'drink' && data.drinks.length === 1) {
-    return navigate(`/drinks/${data.drinks[0].idDrink}`);
-  }
-
-  if (consumable === 'meal' && data.meals.length === 1) {
-    return navigate(`/meals/${data.meals[0].idMeal}`);
-  }
-
-  return data;
-};
-
 export const getMealByFilter = async ({
   searchBarInfo,
-  navigate,
 }: APIRequestInfo) => {
   const { radioBtnValue, searchBarValue } = searchBarInfo;
 
   if (radioBtnValue === 'ingredient-radio') {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchBarValue}`);
     const data = await response.json();
-    return verifyLength('meal', data, navigate);
+    return data;
   }
 
   if (radioBtnValue === 'name-radio') {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchBarValue}`);
     const data = await response.json();
-    return verifyLength('meal', data, navigate);
+    return data;
   }
 
   if (radioBtnValue === firstLetter && searchBarValue.length > 1) {
@@ -47,7 +26,7 @@ export const getMealByFilter = async ({
   if (radioBtnValue === firstLetter) {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchBarValue}`);
     const data = await response.json();
-    return verifyLength('meal', data, navigate);
+    return data;
   }
   const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
   const data = await response.json();
@@ -56,20 +35,19 @@ export const getMealByFilter = async ({
 
 export const getDrinksByFilter = async ({
   searchBarInfo,
-  navigate,
 }: APIRequestInfo) => {
   const { searchBarValue, radioBtnValue } = searchBarInfo;
 
   if (radioBtnValue === 'ingredient-radio') {
     const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchBarValue}`);
     const data = await response.json();
-    return verifyLength('drink', data, navigate);
+    return data;
   }
 
   if (radioBtnValue === 'name-radio') {
     const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchBarValue}`);
     const data = await response.json();
-    return verifyLength('drink', data, navigate);
+    return data;
   }
 
   if (radioBtnValue === firstLetter && searchBarValue.length > 1) {
@@ -79,10 +57,36 @@ export const getDrinksByFilter = async ({
   if (radioBtnValue === firstLetter) {
     const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchBarValue}`);
     const data = await response.json();
-    return verifyLength('drink', data, navigate);
+    return data;
   }
   const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
   const data = await response.json();
   console.log(data);
+  return data;
+};
+
+export const getFiltersList = async (page: 'meals' | 'drinks') => {
+  if (page === 'meals') {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+    const data = await response.json();
+    return data;
+  }
+
+  if (page === 'drinks') {
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+    const data = await response.json();
+    return data;
+  }
+};
+
+export const getMealsFilteredListByCategory = async (category: string) => {
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+  const data = await response.json();
+  return data;
+};
+
+export const getDrinksFilteredListByCategory = async (category: string) => {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
+  const data = await response.json();
   return data;
 };
