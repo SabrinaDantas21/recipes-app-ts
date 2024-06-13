@@ -39,7 +39,10 @@ export type GlobalStoreType = {
   allRecipesListReducer: {
     meals: MealObjectType[];
     drinks: DrinkObjectType[];
-  }
+  },
+  detailedRecipeReducer: {
+    recipe: MealObjectType;
+  },
 };
 
 export type MenuRecipeCardPropsType = {

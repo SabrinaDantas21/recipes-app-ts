@@ -1,5 +1,6 @@
 import {
   SET_CREDENTIALS,
+  SET_DETAILED_RECIPE,
   SET_DRINKS_LIST,
   SET_MEALS_LIST,
   SET_PAGE,
@@ -14,7 +15,9 @@ import {
   getDrinksByFilter,
   getDrinksFilteredListByCategory,
   getMealByFilter,
-  getMealsFilteredListByCategory } from '../../services/api';
+  getMealsFilteredListByCategory,
+  getSingleDrinkRecipe,
+  getSingleMealRecipe } from '../../services/api';
 
 export const setCredentials = ({ email, password }: SetCredentialsPayloadType) => ({
   type: SET_CREDENTIALS,
@@ -70,6 +73,27 @@ export const setAllDrinksList = (category = '') => {
       } else {
         const data = await getDrinksByFilter(currentInfo);
         dispatch(setDrinksListAction(data.drinks));
+      }
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const setDetailedRecipeAction = (data: MealObjectType) => ({
+  type: SET_DETAILED_RECIPE,
+  payload: data,
+});
+
+export const setDetailedRecipe = (recipeId: string, page: string) => {
+  return async (dispatch: DispatchType) => {
+    try {
+      if (page === 'meals') {
+        const data = await getSingleMealRecipe(recipeId);
+        dispatch(setDetailedRecipeAction(data.meals[0]));
+      } else {
+        const data = await getSingleDrinkRecipe(recipeId);
+        dispatch(setDetailedRecipeAction(data.drinks[0]));
       }
     } catch (error: any) {
       console.log(error.message);

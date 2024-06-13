@@ -6,7 +6,6 @@ import Recipes from '../components/Recipes';
 import { DispatchType } from '../util/types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import FilterButtons from '../components/FilterButtons';
 import { getMealByFilter } from '../services/api';
 
 function Drinks() {
