@@ -48,6 +48,6 @@ export type MenuRecipeCardPropsType = {
 };
 
 // -----------Tipagem do Thunk -----------
-// ===== Editar quando adicionar alguma chave no estado =====
+// ===== Editar quando adicionar alguma chave no estado  =====
 
 export type DispatchType = ThunkDispatch<GlobalStoreType, unknown, AnyAction>;
