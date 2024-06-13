@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Input from './Input';
 import { getDrinksByFilter, getMealByFilter } from '../services/api';
 import { SelectedPage } from '../util/types';
+import { verifyLength } from '../util/helpers';
 
 const searchBarFilterState = {
   searchBarValue: '',
@@ -24,15 +25,16 @@ function SearchBar({ page }: SelectedPage) {
   const handleSubmit = async () => {
     const currentInfo = {
       searchBarInfo,
-      navigate,
     };
 
     if (page === 'meals') {
-      await getMealByFilter(currentInfo);
+      const data = await getMealByFilter(currentInfo);
+      return verifyLength('meal', data, navigate);
     }
 
     if (page === 'drinks') {
-      await getDrinksByFilter(currentInfo);
+      const data = await getDrinksByFilter(currentInfo);
+      return verifyLength('drink', data, navigate);
     }
   };
 
