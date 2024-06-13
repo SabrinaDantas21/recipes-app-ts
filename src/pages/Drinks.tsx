@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setPage } from '../redux/actions';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import FilterButtons from '../components/FilterButtons';
 
 function Drinks() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function Drinks() {
   return (
     <>
       <Header page="drinks" />
+      <FilterButtons page="drinks" />
       <Footer />
     </>
   );

@@ -1,4 +1,4 @@
-import { APIRequestInfo } from '../util/types';
+import { APIRequestInfo, SelectedPage } from '../util/types';
 
 const firstLetter = 'first-letter-radio';
 
@@ -79,5 +79,19 @@ export const getDrinksByFilter = async ({
     const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchBarValue}`);
     const data = await response.json();
     return verifyLength('drink', data, navigate);
+  }
+};
+
+export const getFiltersList = async (page: 'meals' | 'drinks') => {
+  if (page === 'meals') {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+    const data = await response.json();
+    return data;
+  }
+
+  if (page === 'drinks') {
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+    const data = await response.json();
+    return data;
   }
 };
