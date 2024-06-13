@@ -28,6 +28,9 @@ export const getMealByFilter = async ({
     const data = await response.json();
     return data;
   }
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+  const data = await response.json();
+  return data;
 };
 
 export const getDrinksByFilter = async ({
@@ -56,4 +59,7 @@ export const getDrinksByFilter = async ({
     const data = await response.json();
     return data;
   }
+  const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+  const data = await response.json();
+  return data;
 };
