@@ -1,38 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { DispatchType, GlobalStoreType } from '../util/types';
-import { setDetailedRecipe } from '../redux/actions';
-import Button from './Button';
-import './Button.css';
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import Button from '../components/Button';
+import { GlobalStoreType } from '../util/types';
 
-export default function RecipeDetails() {
+export default function RecipeInProgress() {
   const location = useLocation();
-  const navigate = useNavigate();
-  const [isMeal, setIsMeal] = useState(false);
-  const dispatch: DispatchType = useDispatch();
   const recipe = useSelector(
     (state: GlobalStoreType) => state.detailedRecipeReducer.recipe,
   );
-
-  const { id } = useParams<{ id: string }>();
-
-  useEffect(() => {
-    if (location.pathname.includes('meals')) {
-      dispatch(setDetailedRecipe(id as string, 'meals'));
-      setIsMeal(true);
-    } else if (location.pathname.includes('drinks')) {
-      dispatch(setDetailedRecipe(id as string, 'drinks'));
-    }
-  }, [dispatch, id, location.pathname]);
-
-  const handleOnClick = () => {
-    navigate(`${location.pathname}/in-progress`);
-  };
-
-  if (!recipe) {
-    return <p>Carregando detalhes da receita...</p>;
-  }
 
   return (
     <>
@@ -48,7 +23,7 @@ export default function RecipeDetails() {
           {recipe.strCategory}
         </p>
       </h3>
-      {isMeal ? (
+      {location.pathname.includes('meal') ? (
         <div>
           <iframe
             width="560"
@@ -82,9 +57,8 @@ export default function RecipeDetails() {
       <Button
         className="fixed-btn"
         dataTestidBtn="start-recipe-btn"
-        onClick={ handleOnClick }
       >
-        Start Recipe
+        Finish Recipe
       </Button>
     </>
   );
