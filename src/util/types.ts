@@ -184,6 +184,16 @@ export type ButtonType = {
   className?: string
 };
 
+export type FavoriteRecipesType = {
+  id: string
+  type: string
+  nationality: string
+  category: string
+  alcoholicOrNot: string
+  name: string
+  image: string
+};
+
 // -----------Tipagem do Thunk -----------
 
 export type DispatchType = ThunkDispatch<GlobalStoreType, unknown, AnyAction>;

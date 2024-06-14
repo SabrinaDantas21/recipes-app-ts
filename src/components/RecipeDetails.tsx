@@ -9,6 +9,8 @@ import Button from './Button';
 import './Button.css';
 import RecommendationCard from './RecommendationCard';
 import { getDrinksByFilter, getMealByFilter } from '../services/api';
+import DetailsInteractiveBtns from './DetailsInteractiveBtns';
+
 
 export default function RecipeDetails() {
   const location = useLocation();
@@ -85,6 +87,9 @@ export default function RecipeDetails() {
         data-testid="recipe-photo"
       />
       <h1 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h1>
+
+      <DetailsInteractiveBtns />
+
       <h3>
         Category
         <p data-testid="recipe-category">
