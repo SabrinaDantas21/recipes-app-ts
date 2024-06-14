@@ -11,7 +11,6 @@ import RecommendationCard from './RecommendationCard';
 import { getDrinksByFilter, getMealByFilter } from '../services/api';
 import DetailsInteractiveBtns from './DetailsInteractiveBtns';
 
-
 export default function RecipeDetails() {
   const location = useLocation();
   const navigate = useNavigate();
