@@ -1,29 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import 'react-multi-carousel/lib/styles.css';
 import { setAllMealsList, setPage } from '../redux/actions';
 import Recipes from '../components/Recipes';
 import { DispatchType } from '../util/types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { getDrinksByFilter } from '../services/api';
 
 function Meals() {
   const dispatch: DispatchType = useDispatch();
-  const navigate = useNavigate();
-  const [drinksRecommendation, setDrinksRecommendation] = useState([]);
-
-  const getDrinksRecommendation = async () => {
-    const currentInfo = {
-      searchBarInfo: {
-        radioBtnValue: '',
-        searchBarValue: '',
-      },
-      navigate,
-    };
-    const data = await getDrinksByFilter(currentInfo);
-    setDrinksRecommendation(data);
-  };
 
   useEffect(() => {
     dispatch(setPage({
@@ -31,12 +16,13 @@ function Meals() {
       showSearchIcon: true,
     }));
     dispatch(setAllMealsList());
-    getDrinksRecommendation();
   }, []);
 
   return (
     <>
-      <Header page="meals" />
+      <header>
+        <Header page="meals" />
+      </header>
       <Recipes />
       <Footer />
     </>
