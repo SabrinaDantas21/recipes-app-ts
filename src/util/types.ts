@@ -92,6 +92,11 @@ export type DoneRecipeType = {
   tags: string;
 };
 
+export type ConditionButtonType = {
+  type: string;
+  id?: string;
+};
+
 // -----------Tipagem do Thunk -----------
 
 export type DispatchType = ThunkDispatch<GlobalStoreType, unknown, AnyAction>;

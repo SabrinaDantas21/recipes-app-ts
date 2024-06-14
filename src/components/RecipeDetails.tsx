@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { DispatchType, DoneRecipeType, GlobalStoreType } from '../util/types';
+import { useLocation, useParams } from 'react-router-dom';
+import { DispatchType, GlobalStoreType } from '../util/types';
 import { setDetailedRecipe } from '../redux/actions';
-import Button from './Button';
 import './Button.css';
+import ConditionBtn from './ConditionBtn';
 
 export default function RecipeDetails() {
   const location = useLocation();
@@ -13,9 +13,6 @@ export default function RecipeDetails() {
   const recipe = useSelector(
     (state: GlobalStoreType) => state.detailedRecipeReducer.recipe,
   );
-  const navigate = useNavigate();
-  const [isRecipeDone, setIsRecipeDone] = useState(false);
-  const [btnName, setBtnName] = useState('Start');
 
   const { id } = useParams<{ id: string }>();
   const type = isMeal ? 'meals' : 'drinks';
@@ -28,53 +25,6 @@ export default function RecipeDetails() {
       dispatch(setDetailedRecipe(id as string, 'drinks'));
     }
   }, [dispatch, id, location.pathname]);
-
-  const addToInProgressRecipes = () => {
-    const inProgressRecipesLs = localStorage.getItem('inProgressRecipes');
-    const inProgressRecipes = inProgressRecipesLs
-      ? JSON.parse(inProgressRecipesLs) : { meals: {}, drinks: {} };
-
-    const updatedInProgressRecipes = {
-      ...inProgressRecipes,
-      [type]: {
-        ...inProgressRecipes[type],
-        [id as string]: Object.keys(recipe).filter((key) => key
-          .includes('strIngredient') && recipe[key]),
-      },
-    };
-
-    localStorage.setItem('inProgressRecipes', JSON.stringify(updatedInProgressRecipes));
-  };
-
-  useEffect(() => {
-    const doneRecipesLs = localStorage.getItem('doneRecipes');
-    const inProgressRecipesLs = localStorage.getItem('inProgressRecipes');
-    if (doneRecipesLs) {
-      const doneRecipes = JSON.parse(doneRecipesLs);
-
-      const LsRecipes = doneRecipes
-        .some((doneRecipe: DoneRecipeType) => doneRecipe.id === id);
-      setIsRecipeDone(LsRecipes);
-    }
-
-    if (inProgressRecipesLs) {
-      const recipeStatus = JSON.parse(inProgressRecipesLs);
-      const isStarted = id as string in recipeStatus;
-
-      if (isStarted) {
-        setBtnName('Continue');
-      }
-    }
-  }, [id, type]);
-
-  const handleClick = () => {
-    addToInProgressRecipes();
-    if (type === 'meals') {
-      navigate(`/meals/${id}/in-progress/`);
-    } else {
-      navigate(`/drinks/${id}/in-progress/`);
-    }
-  };
 
   if (!recipe) {
     return <p>Carregando detalhes da receita...</p>;
@@ -125,17 +75,7 @@ export default function RecipeDetails() {
       </ul>
       <h3>Instructions</h3>
       <p data-testid="instructions">{recipe.strInstructions}</p>
-      {!isRecipeDone && (
-        <Button
-          className="fixed-btn"
-          dataTestidBtn="start-recipe-btn"
-          onClick={ handleClick }
-        >
-          {btnName}
-          {' '}
-          Recipe
-        </Button>
-      )}
+      <ConditionBtn type={ type } id={ id } />
     </>
   );
 }

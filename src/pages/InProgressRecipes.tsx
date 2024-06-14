@@ -1,9 +1,6 @@
-import React from 'react';
-import RecipeDetails from '../components/RecipeDetails';
-
 function InProgressRecipes() {
   return (
-    <RecipeDetails />
+    <div>Hello world!</div>
   );
 }
 
