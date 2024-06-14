@@ -63,6 +63,7 @@ export type FilterButtonsType = {
 };
 
 export type ButtonType = {
+  children?: React.ReactNode
   type?: 'button' | 'reset' | 'submit' | undefined
   dataTestid?: string
   dataTestidBtn?: string
@@ -71,6 +72,7 @@ export type ButtonType = {
   alt?: string
   disabled?: boolean
   text?: string
+  className?: string
 };
 
 // -----------Tipagem do Thunk -----------
