@@ -1,10 +1,5 @@
 import { NavigateFunction } from 'react-router-dom';
-import { DrinkObjectType, MealObjectType } from './types';
-
-type ApiDataType = {
-  meals?: MealObjectType[]
-  drinks?: DrinkObjectType[]
-};
+import { ApiDataType } from './types';
 
 export const verifyLength = (
   consumable: 'drink' | 'meal',

@@ -33,6 +33,11 @@ export type DrinkObjectType = {
   [key: string]: string | null;
 };
 
+export type ApiDataType = {
+  meals?: MealObjectType[]
+  drinks?: DrinkObjectType[]
+};
+
 export type GlobalStoreType = {
   loginReducer: SetCredentialsPayloadType;
   pageReducer: SetPagePayloadType;
