@@ -194,6 +194,5 @@ export type FavoriteRecipesType = {
   image: string
 };
 
-// -----------Tipagem do Thunk -----------
-
+// -----------Tipagem do Thunk ----------- //
 export type DispatchType = ThunkDispatch<GlobalStoreType, unknown, AnyAction>;
