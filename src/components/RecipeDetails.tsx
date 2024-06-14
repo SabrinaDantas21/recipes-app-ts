@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 import { DispatchType, GlobalStoreType } from '../util/types';
 import { setDetailedRecipe } from '../redux/actions';
+import Button from './Button';
+import './Button.css';
 
 export default function RecipeDetails() {
   const location = useLocation();
@@ -72,6 +74,12 @@ export default function RecipeDetails() {
       </ul>
       <h3>Instructions</h3>
       <p data-testid="instructions">{recipe.strInstructions}</p>
+      <Button
+        className="fixed-btn"
+        dataTestidBtn="start-recipe-btn"
+      >
+        Start Recipe
+      </Button>
     </>
   );
 }
