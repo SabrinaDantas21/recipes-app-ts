@@ -33,13 +33,21 @@ export type DrinkObjectType = {
   [key: string]: string | null;
 };
 
+export type ApiDataType = {
+  meals?: MealObjectType[]
+  drinks?: DrinkObjectType[]
+};
+
 export type GlobalStoreType = {
   loginReducer: SetCredentialsPayloadType;
   pageReducer: SetPagePayloadType;
   allRecipesListReducer: {
     meals: MealObjectType[];
     drinks: DrinkObjectType[];
-  }
+  },
+  detailedRecipeReducer: {
+    recipe: MealObjectType;
+  },
 };
 
 export type MenuRecipeCardPropsType = {
@@ -158,8 +166,13 @@ export type CardPropType = {
   img: string,
   title: string,
 };
+export type AllRecipesListType = {
+  meals: MealRecommendationType,
+  drinks: DrinkObjectType,
+};
 
 export type ButtonType = {
+  children?: React.ReactNode
   type?: 'button' | 'reset' | 'submit' | undefined
   dataTestid?: string
   dataTestidBtn?: string
@@ -168,6 +181,7 @@ export type ButtonType = {
   alt?: string
   disabled?: boolean
   text?: string
+  className?: string
 };
 
 // -----------Tipagem do Thunk -----------
