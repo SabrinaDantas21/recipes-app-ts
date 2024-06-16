@@ -21,11 +21,12 @@ export default function RecipeDetails() {
   );
 
   const { id } = useParams<{ id: string }>();
-  const type = isMeal ? 'meals' : 'drinks';
 
   const [isMeal, setIsMeal] = useState(false);
   const [recommendations, setRecommendations] = useState<object>([]);
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  const type = isMeal ? 'meals' : 'drinks';
 
   const currentInfo = {
     searchBarInfo: {
