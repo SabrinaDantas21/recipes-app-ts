@@ -15,10 +15,10 @@ function App() {
       <Route path="/" element={ <Login /> } />
       <Route path="/meals" element={ <Meals /> } />
       <Route path="/meals/:id" element={ <RecipeDetails /> } />
-      <Route path="/meals/:id/in-progress" element={ <Meals /> } />
+      <Route path="/meals/:id/in-progress" element={ <RecipeDetails /> } />
       <Route path="/drinks" element={ <Drinks /> } />
       <Route path="/drinks/:id" element={ <RecipeDetails /> } />
-      <Route path="/drinks/:id/in-progess" element={ <Drinks /> } />
+      <Route path="/drinks/:id/in-progress" element={ <RecipeDetails /> } />
       <Route path="/profile" element={ <Profile /> } />
       <Route path="/done-recipes" element={ <DoneRecipes /> } />
       <Route path="/favorite-recipes" element={ <FavoriteRecipes /> } />

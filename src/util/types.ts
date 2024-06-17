@@ -184,6 +184,23 @@ export type ButtonType = {
   className?: string
 };
 
+export type DoneRecipeType = {
+  id: string;
+  type: string;
+  nationality: string;
+  category: string;
+  alcoholicOrNot: string;
+  name: string;
+  image: string;
+  doneDate: string;
+  tags: string;
+};
+
+export type ConditionButtonType = {
+  type: string;
+  id?: string;
+};
+
 export type FavoriteRecipesType = {
   id: string
   type: string

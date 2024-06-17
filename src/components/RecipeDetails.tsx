@@ -4,8 +4,8 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { DispatchType, GlobalStoreType } from '../util/types';
+import ConditionBtn from './ConditionBtn';
 import { setAllDrinksList, setAllMealsList, setDetailedRecipe } from '../redux/actions';
-import Button from './Button';
 import './Button.css';
 import RecommendationCard from './RecommendationCard';
 import { getDrinksByFilter, getMealByFilter } from '../services/api';
@@ -25,6 +25,8 @@ export default function RecipeDetails() {
   const [isMeal, setIsMeal] = useState(false);
   const [recommendations, setRecommendations] = useState<object>([]);
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  const type = isMeal ? 'meals' : 'drinks';
 
   const currentInfo = {
     searchBarInfo: {
@@ -126,12 +128,9 @@ export default function RecipeDetails() {
       </ul>
       <h3>Instructions</h3>
       <p data-testid="instructions">{recipe.strInstructions}</p>
-      <Button
-        className="fixed-btn"
-        dataTestidBtn="start-recipe-btn"
-      >
-        Start Recipe
-      </Button>
+
+      <ConditionBtn type={ type } id={ id } />
+
       <div style={ { width: '40%' } }>
         <Carousel
           swipeable={ false }
