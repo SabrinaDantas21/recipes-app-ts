@@ -1,13 +1,35 @@
-import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import Button from '../components/Button';
-import { GlobalStoreType } from '../util/types';
+import { DispatchType, GlobalStoreType, IngredientChecksType } from '../util/types';
+import IngredientCheckbox from '../components/IngredientCheckbox';
+import { updateRecipeInProgress } from '../redux/actions';
 
 export default function RecipeInProgress() {
+  const dispatch: DispatchType = useDispatch();
   const location = useLocation();
-  const recipe = useSelector(
-    (state: GlobalStoreType) => state.detailedRecipeReducer.recipe,
+  const { id } = useParams<{ id: string }>();
+  const { recipe } = useSelector(
+    (state: GlobalStoreType) => state.updateRecipeInProgressReducer,
   );
+
+  useEffect(() => {
+    if (location.pathname.includes('meals')) {
+      dispatch(updateRecipeInProgress(id as string, 'meals'));
+    } else if (location.pathname.includes('drinks')) {
+      dispatch(updateRecipeInProgress(id as string, 'drinks'));
+    }
+  }, [dispatch, id, location.pathname]);
+
+  const ingredientsList = Object.keys(recipe)
+    .filter((key) => key.includes('Ingredient') && recipe[key]);
+
+  const newIngredientChecksObject = ingredientsList
+    .reduce((acc, ingredient) => {
+      if (!acc[ingredient]) acc = { ...acc, [ingredient]: false };
+      return acc;
+    }, {} as IngredientChecksType);
 
   return (
     <>
@@ -42,21 +64,20 @@ export default function RecipeInProgress() {
       )}
       <h3>Ingredients</h3>
       <ul>
-        {Object.keys(recipe).filter((key) => key.includes('Ingredient') && recipe[key])
-          .map((ingredient, index) => (
-            <li key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
-              {recipe[ingredient]}
-              {' '}
-              -
-              {recipe[`strMeasure${ingredient.match(/\d+/)}`]}
-            </li>
-          ))}
+        { ingredientsList.map((ingredient, index) => (
+          <IngredientCheckbox
+            key={ index }
+            recipe={ recipe }
+            ingredient={ ingredient }
+            index={ index }
+          />
+        ))}
       </ul>
       <h3>Instructions</h3>
       <p data-testid="instructions">{recipe.strInstructions}</p>
       <Button
         className="fixed-btn"
-        dataTestidBtn="start-recipe-btn"
+        dataTestidBtn="finish-recipe-btn"
       >
         Finish Recipe
       </Button>

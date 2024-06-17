@@ -48,6 +48,10 @@ export type GlobalStoreType = {
   detailedRecipeReducer: {
     recipe: MealObjectType;
   },
+  updateRecipeInProgressReducer: {
+    recipe: MealObjectType;
+    ingredientChecks: IngredientChecksType;
+  },
 };
 
 export type MenuRecipeCardPropsType = {
@@ -78,6 +82,16 @@ export type ButtonType = {
   disabled?: boolean
   text?: string
   className?: string
+};
+
+export type IngredientInputProps = {
+  recipe : MealObjectType;
+  ingredient: string;
+  index: number;
+};
+
+export type IngredientChecksType = {
+  [key: string]: boolean;
 };
 
 // -----------Tipagem do Thunk -----------
