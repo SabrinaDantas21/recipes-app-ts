@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import Button from '../components/Button';
 import { DispatchType, GlobalStoreType, IngredientChecksType } from '../util/types';
 import IngredientCheckbox from '../components/IngredientCheckbox';
-import { updateRecipeInProgress } from '../redux/actions';
+import { setIngredientChecks, updateRecipeInProgress } from '../redux/actions';
+import DetailsInteractiveBtns from '../components/DetailsInteractiveBtns';
+import ConditionBtn from '../components/ConditionBtn';
 
 export default function RecipeInProgress() {
   const dispatch: DispatchType = useDispatch();
@@ -14,22 +15,44 @@ export default function RecipeInProgress() {
     (state: GlobalStoreType) => state.updateRecipeInProgressReducer,
   );
 
+  type IngredientsListLsType = {
+    drinks: {
+      [key: string]: string[];
+    };
+    meals: {
+      [key: string]: string[];
+    }
+  };
+
   useEffect(() => {
+    const { meals, drinks }: IngredientsListLsType = JSON
+      .parse(localStorage.getItem('inProgressRecipes') as string);
+
     if (location.pathname.includes('meals')) {
       dispatch(updateRecipeInProgress(id as string, 'meals'));
+      if (meals) {
+        const ingredientChecksInitObj = meals[id as string]
+          .reduce((acc: IngredientChecksType, ingredient: string) => {
+            if (!acc[ingredient]) acc = { ...acc, [ingredient]: false };
+            return acc;
+          }, {});
+        dispatch(setIngredientChecks(ingredientChecksInitObj));
+      }
     } else if (location.pathname.includes('drinks')) {
       dispatch(updateRecipeInProgress(id as string, 'drinks'));
+      if (drinks) {
+        const ingredientChecksInitObj = drinks[id as string]
+          .reduce((acc: IngredientChecksType, ingredient: string) => {
+            if (!acc[ingredient]) acc = { ...acc, [ingredient]: false };
+            return acc;
+          }, {});
+        dispatch(setIngredientChecks(ingredientChecksInitObj));
+      }
     }
   }, [dispatch, id, location.pathname]);
 
   const ingredientsList = Object.keys(recipe)
     .filter((key) => key.includes('Ingredient') && recipe[key]);
-
-  const newIngredientChecksObject = ingredientsList
-    .reduce((acc, ingredient) => {
-      if (!acc[ingredient]) acc = { ...acc, [ingredient]: false };
-      return acc;
-    }, {} as IngredientChecksType);
 
   return (
     <>
@@ -39,6 +62,9 @@ export default function RecipeInProgress() {
         data-testid="recipe-photo"
       />
       <h1 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h1>
+
+      <DetailsInteractiveBtns />
+
       <h3>
         Category
         <p data-testid="recipe-category">
@@ -75,12 +101,10 @@ export default function RecipeInProgress() {
       </ul>
       <h3>Instructions</h3>
       <p data-testid="instructions">{recipe.strInstructions}</p>
-      <Button
-        className="fixed-btn"
-        dataTestidBtn="finish-recipe-btn"
-      >
-        Finish Recipe
-      </Button>
+      <ConditionBtn
+        type={ location.pathname.includes('meals') ? 'meals' : 'drinks' }
+        id={ id }
+      />
     </>
   );
 }
