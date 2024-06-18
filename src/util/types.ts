@@ -171,6 +171,7 @@ export type CardPropType = {
   img: string | undefined,
   title: string | undefined,
   tags?: Array<string>,
+  type: string,
 };
 export type FinishedRecipes = {
   id: string,
@@ -205,6 +206,7 @@ export type DoneRecipeType = {
 export type ConditionButtonType = {
   type: string;
   id?: string;
+  url: string;
 };
 
 export type FavoriteRecipesType = {

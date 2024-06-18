@@ -3,8 +3,7 @@ import { CardPropType } from '../util/types';
 import ShareButton from './ShareButton';
 
 function RecipeCard(prop: CardPropType) {
-  const { index, img, title, isVisible, done, category, date, tags } = prop;
-  console.log(tags);
+  const { index, img, title, isVisible, done, category, date, tags, url } = prop;
   if (done) {
     return (
       <Card

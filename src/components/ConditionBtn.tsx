@@ -67,8 +67,8 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
       alcoholicOrNot: recipe.strAlcoholic || '',
       name: recipe.strMeal || recipe.strDrink,
       image: recipe.strMealThumb || recipe.strDrinkThumb,
-      doneDate: new Date().toLocaleDateString(),
       tags: recipe.strTags?.split(',') || [],
+      doneDate: new Date().toLocaleDateString(),
     };
     localStorage
       .setItem('doneRecipes', JSON.stringify([...doneRecipesObject, newRecipeObject]));

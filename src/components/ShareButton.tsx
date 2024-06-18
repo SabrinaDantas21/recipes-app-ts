@@ -3,14 +3,17 @@ import Button from './Button';
 import shareBtn from '../images/shareIcon.svg';
 
 function ShareButton({ dataTestidBtn = '' }) {
-  const url = window.location.href;
-
   const [msgIsVisible, setMsgIsVisible] = useState(false);
+  const url = window.location.href.toString();
 
+  const readClipBoard = () => {
+    navigator.clipboard.readText().then((clipText) => console.log(clipText));
+  };
   const handleShareBtn = async () => {
     if (msgIsVisible === false) {
       setMsgIsVisible(true);
-      await navigator.clipboard.writeText(url);
+      await navigator?.clipboard?.writeText(url);
+      readClipBoard();
     } else {
       setMsgIsVisible(false);
     }
@@ -19,7 +22,7 @@ function ShareButton({ dataTestidBtn = '' }) {
   return (
     <>
       <Button
-        dataTestidBtn={ dataTestidBtn }
+        dataTestid={ dataTestidBtn }
         onClick={ handleShareBtn }
         src={ shareBtn }
       />

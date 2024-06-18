@@ -12,6 +12,7 @@ function DoneRecipes() {
   const dispatch = useDispatch();
   const [finishedRecipes,
     setFinishedRecipes] = useState<FinishedRecipes[]>();
+  const [hasFilter, setHasfilter] = useState('');
 
   const getFinishedRecipes = () => {
     const recipes = localStorage.getItem('doneRecipes');
@@ -27,22 +28,40 @@ function DoneRecipes() {
     getFinishedRecipes();
   }, []);
 
+  const handleClick = (filter: string) => {
+    setHasfilter(filter);
+  };
+
   return (
     <>
       <Header />
       <Button dataTestidBtn="filter-by-all-btn"> All</Button>
-      <Button dataTestidBtn="filter-by-meal-btn" src={ mealIcon } />
-      <Button dataTestidBtn="filter-by-drink-btn" src={ drinkIcon } />
+      <Button
+        dataTestidBtn="filter-by-meal-btn"
+        src={ mealIcon }
+        onClick={ () => handleClick('meal') }
+      />
+      <Button
+        dataTestidBtn="filter-by-drink-btn"
+        src={ drinkIcon }
+        onClick={ () => handleClick('drink') }
+      />
       { finishedRecipes !== undefined && finishedRecipes.map((recipe, index) => {
+        const url = recipe.url;
         const tags = recipe?.tags;
         const done = true;
         const key = recipe.name;
         const img = recipe.image;
         const title = recipe.name;
-        const category = `${recipe.nationality} - ${recipe.category}`;
+        const type = recipe?.type;
+        const category = recipe.alcoholicOrNot.includes('Alcoholic')
+          ? `${recipe.category} - ${recipe.alcoholicOrNot}`
+          : `${recipe.nationality} - ${recipe.category}`;
         const date = recipe.doneDate;
         return (
           <RecipeCard
+            url={ url }
+            type={ type }
             tags={ tags }
             category={ category }
             done={ done }
