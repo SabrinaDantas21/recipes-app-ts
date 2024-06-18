@@ -166,14 +166,22 @@ export type CardPropType = {
   isVisible?: boolean | undefined,
   done: boolean | undefined,
   category?: string | undefined,
-  date?: string | undefined,
+  date?: Date,
   key: string | undefined,
   img: string | undefined,
   title: string | undefined,
+  tags?: Array<string>,
 };
-export type AllRecipesListType = {
-  meals: MealRecommendationType,
-  drinks: DrinkObjectType,
+export type FinishedRecipes = {
+  id: string,
+  type: string,
+  nationality: string,
+  category: string,
+  alcoholicOrNot: string,
+  name: string,
+  image: string,
+  doneDate: Date,
+  tags: Array<string>,
 };
 
 export type ButtonType = {

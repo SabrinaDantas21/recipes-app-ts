@@ -6,26 +6,25 @@ import Button from '../components/Button';
 import drinkIcon from '../images/drinkIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 import RecipeCard from '../components/RecipeCard';
-import { DrinkRecommendationType, MealRecommendationType } from '../util/types';
+import { FinishedRecipes } from '../util/types';
 
 function DoneRecipes() {
   const dispatch = useDispatch();
-  const [finishedMealsRecipes,
-    setFinishedMealsRecipes] = useState<MealRecommendationType[]>([]);
-  const [finishedDrinksRecipes,
-    setFinishedDrinksRecipes] = useState<DrinkRecommendationType[]>([]);
-  const recipes = localStorage.getItem('doneRecipes');
-  const data = [];
-  if (recipes) {
-    data.push(JSON.parse(recipes));
-    setFinishedMealsRecipes(data[0].meals);
-    setFinishedDrinksRecipes(data[0].drinks);
-  }
+  const [finishedRecipes,
+    setFinishedRecipes] = useState<FinishedRecipes[]>();
+
+  const getFinishedRecipes = () => {
+    const recipes = localStorage.getItem('doneRecipes');
+    if (recipes) {
+      setFinishedRecipes(JSON.parse(recipes));
+    }
+  };
   useEffect(() => {
     dispatch(setPage({
       title: 'Done Recipes',
       showSearchIcon: false,
     }));
+    getFinishedRecipes();
   }, []);
 
   return (
@@ -34,34 +33,17 @@ function DoneRecipes() {
       <Button dataTestidBtn="filter-by-all-btn"> All</Button>
       <Button dataTestidBtn="filter-by-meal-btn" src={ mealIcon } />
       <Button dataTestidBtn="filter-by-drink-btn" src={ drinkIcon } />
-      { finishedMealsRecipes !== null && finishedMealsRecipes.map((recipe, index) => {
+      { finishedRecipes !== undefined && finishedRecipes.map((recipe, index) => {
+        const tags = recipe?.tags;
         const done = true;
-        const key = recipe.idMeal;
-        const img = recipe.strMealThumb;
-        const title = recipe.strMeal;
-        const category = `${recipe.strArea} - ${recipe.strCategory}`;
-        const date = recipe.finishDate;
+        const key = recipe.name;
+        const img = recipe.image;
+        const title = recipe.name;
+        const category = `${recipe.nationality} - ${recipe.category}`;
+        const date = recipe.doneDate;
         return (
           <RecipeCard
-            category={ category }
-            done={ done }
-            date={ date }
-            key={ key }
-            index={ index }
-            img={ img }
-            title={ title }
-          />
-        );
-      })}
-      { finishedDrinksRecipes !== null && finishedDrinksRecipes.map((recipe, index) => {
-        const done = true;
-        const key = recipe.idDrink;
-        const img = recipe.strDrinkThumb;
-        const title = recipe.strDrink;
-        const category = `${recipe.strCategory}`;
-        const date = recipe.finishDate;
-        return (
-          <RecipeCard
+            tags={ tags }
             category={ category }
             done={ done }
             date={ date }

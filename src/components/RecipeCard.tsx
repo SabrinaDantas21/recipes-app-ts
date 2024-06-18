@@ -3,7 +3,8 @@ import { CardPropType } from '../util/types';
 import ShareButton from './ShareButton';
 
 function RecipeCard(prop: CardPropType) {
-  const { index, img, title, isVisible, done, category, date } = prop;
+  const { index, img, title, isVisible, done, category, date, tags } = prop;
+  console.log(tags);
   if (done) {
     return (
       <Card
@@ -27,6 +28,15 @@ function RecipeCard(prop: CardPropType) {
             {`Done in: ${date}`}
           </Card.Text>
           <ShareButton dataTestidBtn={ `${index}-horizontal-share-btn` } />
+          { tags !== undefined
+            ? tags.map((tag) => (
+              <Card.Footer
+                key={ index }
+                data-testid={ `${index}-${tag}-horizontal-tag` }
+              >
+                { tag }
+              </Card.Footer>
+            )) : null }
         </Card.Body>
       </Card>
     );

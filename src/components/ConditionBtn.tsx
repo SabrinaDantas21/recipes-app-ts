@@ -56,23 +56,22 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
     localStorage.setItem('inProgressRecipes', JSON.stringify(updatedInProgressRecipes));
   };
 
-  /* Lari- Req 43: Add Object.assign(recipe) p/ salvar chave e valor da receita finalizada
-  newObject contém as inf da receita + data do fim da receita */
   const addToDoneRecipes = () => {
-    const doneRecipesLs = localStorage.getItem('doneRecipes');
-    const doneRecipes = doneRecipesLs
-      ? JSON.parse(doneRecipesLs) : { meals: [], drinks: [] };
-    const newObject = Object.assign(recipe);
-    newObject.finishDate = new Date().toLocaleDateString();
-    const updatedDoneRecipes = {
-      ...doneRecipes,
-      [type]: [
-        ...doneRecipes[type],
-        newObject,
-      ],
+    const doneRecipesLs = localStorage.getItem('doneRecipes') || '[]';
+    const doneRecipesObject = JSON.parse(doneRecipesLs);
+    const newRecipeObject = {
+      id: recipe.idMeal || recipe.idDrink,
+      type: location.pathname.includes('/meals') ? 'meal' : 'drink',
+      nationality: recipe.strArea || '',
+      category: recipe.strCategory || '',
+      alcoholicOrNot: recipe.strAlcoholic || '',
+      name: recipe.strMeal || recipe.strDrink,
+      image: recipe.strMealThumb || recipe.strDrinkThumb,
+      doneDate: new Date().toLocaleDateString(),
+      tags: recipe.strTags?.split(',') || [],
     };
-
-    localStorage.setItem('doneRecipes', JSON.stringify(updatedDoneRecipes));
+    localStorage
+      .setItem('doneRecipes', JSON.stringify([...doneRecipesObject, newRecipeObject]));
   };
 
   const handleClick = () => {
