@@ -47,7 +47,6 @@ function DoneRecipes() {
         onClick={ () => handleClick('drink') }
       />
       { finishedRecipes !== undefined && finishedRecipes.map((recipe, index) => {
-        const url = recipe.url;
         const tags = recipe?.tags;
         const done = true;
         const key = recipe.name;
@@ -60,7 +59,6 @@ function DoneRecipes() {
         const date = recipe.doneDate;
         return (
           <RecipeCard
-            url={ url }
             type={ type }
             tags={ tags }
             category={ category }
