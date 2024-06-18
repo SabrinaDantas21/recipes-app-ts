@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setPage } from '../redux/actions';
 import Header from '../components/Header';
@@ -11,7 +11,7 @@ function Profile() {
   const navigate = useNavigate();
 
   const handleChangeLogout = () => {
-    localStorage.clear()
+    localStorage.clear();
     navigate('/');
   };
 
@@ -22,7 +22,7 @@ function Profile() {
     }));
   }, [dispatch]);
 
-  const user = localStorage.getItem('user')
+  const user = localStorage.getItem('user');
   const userObject = JSON.parse(user as string);
   return (
     <>
@@ -30,17 +30,27 @@ function Profile() {
       <h3 data-testid="profile-email">
         {userObject.email}
       </h3>
-      <Button type="button" data-testid="profile-done-btn"  onClick = {()=>{navigate("/done-recipes")}}>
+      <Button
+        type="button"
+        dataTestidBtn="profile-done-btn"
+        onClick={ () => navigate('/done-recipes') }
+      >
         Done Recipes
       </Button>
-      <Button type="button" data-testid="profile-favorite-btn" onClick = {()=>{navigate("/favorite-recipes")}}>
+      <Button
+        type="button"
+        dataTestidBtn="profile-favorite-btn"
+        onClick={ () => navigate('/favorite-recipes') }
+      >
         Favorite Recipes
       </Button>
       <Button
         type="reset"
-        data-testid="profile-logout-btn"
+        dataTestidBtn="profile-logout-btn"
         onClick={ handleChangeLogout }
-      >Logout</Button>
+      >
+        Logout
+      </Button>
       <Footer />
     </>
   );
