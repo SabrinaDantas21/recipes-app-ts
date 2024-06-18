@@ -12,10 +12,9 @@ export default function IngredientCheckbox(
   );
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const type = location.pathname.includes('meals') ? 'meals' : 'drinks';
-
-  const dispatch = useDispatch();
 
   const handleChange = () => {
     const newIngredientChecksObject = {
@@ -23,6 +22,7 @@ export default function IngredientCheckbox(
       [ingredient]: !ingredientChecks[ingredient],
     };
     dispatch(setIngredientChecks(newIngredientChecksObject));
+
     const inProgressRecipesLs = localStorage.getItem('inProgressRecipes');
     const inProgressRecipes = inProgressRecipesLs
       ? JSON.parse(inProgressRecipesLs) : { meals: {}, drinks: {} };
@@ -30,13 +30,9 @@ export default function IngredientCheckbox(
     const arr: number[] = [];
 
     Object.values(newIngredientChecksObject)
-      .forEach((value, i) => {
-        if (value === true) {
-          arr.push(i);
-        }
-      });
+      .forEach((value, i) => { if (value === true) arr.push(i); });
 
-    localStorage.setItem('ingredientChecks', JSON.stringify({
+    localStorage.setItem('inProgressRecipes', JSON.stringify({
       ...inProgressRecipes,
       [type]: {
         ...inProgressRecipes[type],

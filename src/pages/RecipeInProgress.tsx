@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { DispatchType, GlobalStoreType, IngredientChecksType } from '../util/types';
+import { DispatchType, GlobalStoreType } from '../util/types';
 import IngredientCheckbox from '../components/IngredientCheckbox';
-import { setIngredientChecks, updateRecipeInProgress } from '../redux/actions';
+import { initializeRecipeInProgress } from '../redux/actions';
 import DetailsInteractiveBtns from '../components/DetailsInteractiveBtns';
 import ConditionBtn from '../components/ConditionBtn';
 
@@ -15,39 +15,11 @@ export default function RecipeInProgress() {
     (state: GlobalStoreType) => state.updateRecipeInProgressReducer,
   );
 
-  type IngredientsListLsType = {
-    drinks: {
-      [key: string]: string[];
-    };
-    meals: {
-      [key: string]: string[];
-    }
-  };
-
   useEffect(() => {
-    const { meals, drinks }: IngredientsListLsType = JSON
-      .parse(localStorage.getItem('inProgressRecipes') as string);
-
     if (location.pathname.includes('meals')) {
-      dispatch(updateRecipeInProgress(id as string, 'meals'));
-      if (meals) {
-        const ingredientChecksInitObj = meals[id as string]
-          .reduce((acc: IngredientChecksType, ingredient: string) => {
-            if (!acc[ingredient]) acc = { ...acc, [ingredient]: false };
-            return acc;
-          }, {});
-        dispatch(setIngredientChecks(ingredientChecksInitObj));
-      }
+      dispatch(initializeRecipeInProgress(id as string, 'meals'));
     } else if (location.pathname.includes('drinks')) {
-      dispatch(updateRecipeInProgress(id as string, 'drinks'));
-      if (drinks) {
-        const ingredientChecksInitObj = drinks[id as string]
-          .reduce((acc: IngredientChecksType, ingredient: string) => {
-            if (!acc[ingredient]) acc = { ...acc, [ingredient]: false };
-            return acc;
-          }, {});
-        dispatch(setIngredientChecks(ingredientChecksInitObj));
-      }
+      dispatch(initializeRecipeInProgress(id as string, 'drinks'));
     }
   }, [dispatch, id, location.pathname]);
 

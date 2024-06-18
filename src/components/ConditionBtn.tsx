@@ -8,9 +8,11 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
   const location = useLocation();
   const [isRecipeDone, setIsRecipeDone] = useState(false);
   const [btnName, setBtnName] = useState('Start Recipe');
+  const [btnTestId, setBtnTestId] = useState('start-recipe-btn');
+  const [isDisabled, setIsDisabled] = useState(false);
   const navigate = useNavigate();
-  const recipe = useSelector(
-    (state: GlobalStoreType) => state.detailedRecipeReducer.recipe,
+  const { ingredientChecks } = useSelector(
+    (state: GlobalStoreType) => state.updateRecipeInProgressReducer,
   );
 
   useEffect(() => {
@@ -27,20 +29,21 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
         .find((item) => Object.keys(item).includes(id));
 
       if (filterDoneRecipes) {
-        console.log(LsRecipes);
-
         setIsRecipeDone(true);
+      }
+
+      if (location.pathname.includes('in-progress')) {
+        setBtnTestId('finish-recipe-btn');
+        setIsDisabled(!Object.values(ingredientChecks).every((check) => check === true));
+        setBtnName('Finish Recipe');
       }
 
       if (filterInProgressRecipes) {
         setBtnName('Continue Recipe');
       }
-      if (filterInProgressRecipes && location.pathname.includes('/in-progress')) {
-        setBtnName('Finish Recipe');
-      }
     };
     verifyLocalStorage();
-  }, [id, type, location.pathname]);
+  }, [id, type, location.pathname, ingredientChecks]);
 
   const addToInProgressRecipes = () => {
     const inProgressRecipesLs = localStorage.getItem('inProgressRecipes');
@@ -51,8 +54,7 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
       ...inProgressRecipes,
       [type]: {
         ...inProgressRecipes[type],
-        [id as string]: Object.keys(recipe).filter((key) => key
-          .includes('strIngredient') && recipe[key]),
+        [id as string]: [],
       },
     };
     localStorage.setItem('inProgressRecipes', JSON.stringify(updatedInProgressRecipes));
@@ -67,8 +69,7 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
       ...doneRecipes,
       [type]: {
         ...doneRecipes[type],
-        [id as string]: Object.keys(recipe).filter((key) => key
-          .includes('strIngredient') && recipe[key]),
+        [id as string]: [],
       },
     };
 
@@ -92,8 +93,9 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
       {!isRecipeDone && (
         <Button
           className="fixed-btn"
-          dataTestidBtn="start-recipe-btn"
+          dataTestidBtn={ btnTestId }
           onClick={ handleClick }
+          disabled={ isDisabled }
         >
           {btnName}
         </Button>

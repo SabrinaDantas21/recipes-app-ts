@@ -54,10 +54,6 @@ export default function RecipeDetails() {
     getRecommendations();
   }, []);
 
-  const handleOnClick = () => {
-    navigate(`${location.pathname}/in-progress`);
-  };
-
   if (!recipe) {
     return <p>Carregando detalhes da receita...</p>;
   }

@@ -118,19 +118,48 @@ export const setIngredientChecks = (
   payload: ingredientChecks,
 });
 
-export const updateRecipeInProgress = (
+export const initializeRecipeInProgress = (
   recipeId: string,
   page: string,
 ) => {
   return async (dispatch: DispatchType) => {
     try {
+      let recipe: MealObjectType;
       if (page === 'meals') {
         const data = await getSingleMealRecipe(recipeId);
-        dispatch(setRecipeInProgress(data.meals[0]));
+        recipe = { ...data.meals[0] };
       } else {
         const data = await getSingleDrinkRecipe(recipeId);
-        dispatch(setRecipeInProgress(data.drinks[0]));
+        recipe = { ...data.drinks[0] };
       }
+
+      const inProgressRecipesLs = localStorage.getItem('inProgressRecipes');
+      const inProgressRecipes = inProgressRecipesLs
+        ? JSON.parse(inProgressRecipesLs) : { meals: {}, drinks: {} };
+
+      const completedIngredients = recipeId && inProgressRecipes[page][recipeId];
+
+      const initialIngredientsChecks = Object.keys(recipe)
+        .filter((key) => key.includes('Ingredient') && recipe[key])
+        .reduce((acc: IngredientChecksType, ingredient: string) => {
+          if (!acc[ingredient]) acc = { ...acc, [ingredient]: false };
+          return acc;
+        }, {});
+
+      const initialChecksWithLs = () => {
+        Object.keys(initialIngredientsChecks).forEach((check, index) => {
+          if (completedIngredients.includes(index)) {
+            initialIngredientsChecks[check] = true;
+          } else {
+            initialIngredientsChecks[check] = false;
+          }
+        });
+      };
+
+      if (completedIngredients) initialChecksWithLs();
+
+      dispatch(setRecipeInProgress(recipe));
+      dispatch(setIngredientChecks(initialIngredientsChecks));
     } catch (error: any) {
       console.log(error.message);
     }
