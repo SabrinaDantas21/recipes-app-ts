@@ -68,6 +68,7 @@ export type FilterButtonsType = {
 };
 
 export type MealRecommendationType = {
+  finishDate?: string,
   idMeal: string,
   strArea: string,
   strCategory: string,
@@ -120,6 +121,7 @@ export type MealRecommendationType = {
 };
 
 export type DrinkRecommendationType = {
+  finishDate?: string,
   idDrink: string,
   strAlcoholic: string,
   strCategory: string,
@@ -160,14 +162,14 @@ export type DrinkRecommendationType = {
 };
 
 export type CardPropType = {
-  index: number,
-  isVisible?: boolean,
-  done: boolean,
-  category?: string,
-  date?: string,
-  key: string,
-  img: string,
-  title: string,
+  index: number | undefined,
+  isVisible?: boolean | undefined,
+  done: boolean | undefined,
+  category?: string | undefined,
+  date?: string | undefined,
+  key: string | undefined,
+  img: string | undefined,
+  title: string | undefined,
 };
 export type AllRecipesListType = {
   meals: MealRecommendationType,

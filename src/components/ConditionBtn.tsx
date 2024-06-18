@@ -56,7 +56,8 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
     localStorage.setItem('inProgressRecipes', JSON.stringify(updatedInProgressRecipes));
   };
 
-  // Lari- Req 43: Add Object.assign(recipe) p/ salvar chave e valor da receita finalizada
+  /* Lari- Req 43: Add Object.assign(recipe) p/ salvar chave e valor da receita finalizada
+  newObject contém as inf da receita + data do fim da receita */
   const addToDoneRecipes = () => {
     const doneRecipesLs = localStorage.getItem('doneRecipes');
     const doneRecipes = doneRecipesLs
