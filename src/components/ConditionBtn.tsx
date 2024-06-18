@@ -27,8 +27,6 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
         .find((item) => Object.keys(item).includes(id));
 
       if (filterDoneRecipes) {
-        console.log(LsRecipes);
-
         setIsRecipeDone(true);
       }
 
@@ -58,18 +56,19 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
     localStorage.setItem('inProgressRecipes', JSON.stringify(updatedInProgressRecipes));
   };
 
+  // Lari- Req 43: Add Object.assign(recipe) p/ salvar chave e valor da receita finalizada
   const addToDoneRecipes = () => {
     const doneRecipesLs = localStorage.getItem('doneRecipes');
     const doneRecipes = doneRecipesLs
-      ? JSON.parse(doneRecipesLs) : { meals: {}, drinks: {} };
-
+      ? JSON.parse(doneRecipesLs) : { meals: [], drinks: [] };
+    const newObject = Object.assign(recipe);
+    newObject.finishDate = new Date().toLocaleDateString();
     const updatedDoneRecipes = {
       ...doneRecipes,
-      [type]: {
+      [type]: [
         ...doneRecipes[type],
-        [id as string]: Object.keys(recipe).filter((key) => key
-          .includes('strIngredient') && recipe[key]),
-      },
+        newObject,
+      ],
     };
 
     localStorage.setItem('doneRecipes', JSON.stringify(updatedDoneRecipes));

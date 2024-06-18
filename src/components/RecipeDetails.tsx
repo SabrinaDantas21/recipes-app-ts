@@ -7,9 +7,10 @@ import { DispatchType, GlobalStoreType } from '../util/types';
 import ConditionBtn from './ConditionBtn';
 import { setAllDrinksList, setAllMealsList, setDetailedRecipe } from '../redux/actions';
 import './Button.css';
-import RecommendationCard from './RecommendationCard';
 import { getDrinksByFilter, getMealByFilter } from '../services/api';
 import DetailsInteractiveBtns from './DetailsInteractiveBtns';
+import RecipeCard from './RecipeCard';
+import ShareButton from './ShareButton';
 
 export default function RecipeDetails() {
   const location = useLocation();
@@ -90,6 +91,7 @@ export default function RecipeDetails() {
       <h1 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h1>
 
       <DetailsInteractiveBtns />
+      <ShareButton dataTestidBtn="share-btn" />
 
       <h3>
         Category
@@ -147,14 +149,15 @@ export default function RecipeDetails() {
           { recommendations.map((recommendation, index) => {
             const key = recommendation.idDrink || recommendation.idMeal;
             const img = recommendation.strDrinkThumb || recommendation.strMealThumb;
-            const title = recommendation.strMeal || recommendation.strDrink;
+            const title = recommendation.strDrink || recommendation.strMeal;
             const isVisible = index >= currentSlide && index < currentSlide + 2;
             if (index < 6) {
               return (
                 <div
                   key={ key }
                 >
-                  <RecommendationCard
+                  <RecipeCard
+                    done={ false }
                     isVisible={ isVisible }
                     key={ key }
                     index={ index }

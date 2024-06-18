@@ -161,7 +161,10 @@ export type DrinkRecommendationType = {
 
 export type CardPropType = {
   index: number,
-  isVisible: boolean,
+  isVisible?: boolean,
+  done: boolean,
+  category?: string,
+  date?: string,
   key: string,
   img: string,
   title: string,
@@ -185,15 +188,8 @@ export type ButtonType = {
 };
 
 export type DoneRecipeType = {
-  id: string;
-  type: string;
-  nationality: string;
-  category: string;
-  alcoholicOrNot: string;
-  name: string;
-  image: string;
-  doneDate: string;
-  tags: string;
+  drinks: object,
+  meals: object,
 };
 
 export type ConditionButtonType = {

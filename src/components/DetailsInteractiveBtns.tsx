@@ -1,28 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import shareBtn from '../images/searchIcon.svg';
 import isntFavoriteBtn from '../images/whiteHeartIcon.svg';
 import isFavoriteBtn from '../images/blackHeartIcon.svg';
 import Button from './Button';
 import { FavoriteRecipesType, GlobalStoreType } from '../util/types';
-
-const url = window.location.href;
+import ShareButton from './ShareButton';
 
 function DetailsInteractiveBtns() {
-  const [msgIsVisible, setMsgIsVisible] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const recipe = useSelector(
     (state: GlobalStoreType) => state.detailedRecipeReducer.recipe,
   );
-
-  const handleShareBtn = async () => {
-    if (msgIsVisible === false) {
-      setMsgIsVisible(true);
-      await navigator.clipboard.writeText(url);
-    } else {
-      setMsgIsVisible(false);
-    }
-  };
 
   const handleFavoriteBtn = () => {
     const prevFavoriteList = JSON.parse(localStorage.getItem('favoriteRecipes') || '[]');
@@ -69,36 +57,23 @@ function DetailsInteractiveBtns() {
   }, [handleFavoriteBtn]);
 
   return (
-    <>
-      <div>
+    <div>
+      <ShareButton />
+      {isFavorite === true ? (
         <Button
-          dataTestidBtn="share-btn"
-          onClick={ handleShareBtn }
-          src={ shareBtn }
+          dataTestid="favorite-btn"
+          onClick={ handleFavoriteBtn }
+          src={ isFavoriteBtn }
+        />
+      ) : (
+        <Button
+          dataTestid="favorite-btn"
+          onClick={ handleFavoriteBtn }
+          src={ isntFavoriteBtn }
         />
 
-        {isFavorite === true ? (
-          <Button
-            dataTestid="favorite-btn"
-            onClick={ handleFavoriteBtn }
-            src={ isFavoriteBtn }
-          />
-        ) : (
-          <Button
-            dataTestid="favorite-btn"
-            onClick={ handleFavoriteBtn }
-            src={ isntFavoriteBtn }
-          />
-
-        )}
-      </div>
-      {msgIsVisible === true && (
-        <>
-          <p>Link copied!</p>
-          <Button text="fechar" onClick={ handleShareBtn } />
-        </>
       )}
-    </>
+    </div>
   );
 }
 
