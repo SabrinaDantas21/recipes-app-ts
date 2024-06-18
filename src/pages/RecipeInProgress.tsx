@@ -21,7 +21,7 @@ export default function RecipeInProgress() {
     } else if (location.pathname.includes('drinks')) {
       dispatch(initializeRecipeInProgress(id as string, 'drinks'));
     }
-  }, [dispatch, id, location.pathname]);
+  }, []);
 
   const ingredientsList = Object.keys(recipe)
     .filter((key) => key.includes('Ingredient') && recipe[key]);
