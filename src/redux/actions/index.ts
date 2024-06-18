@@ -148,11 +148,7 @@ export const initializeRecipeInProgress = (
 
       const initialChecksWithLs = () => {
         Object.keys(initialIngredientsChecks).forEach((check, index) => {
-          if (completedIngredients.includes(index)) {
-            initialIngredientsChecks[check] = true;
-          } else {
-            initialIngredientsChecks[check] = false;
-          }
+          initialIngredientsChecks[check] = completedIngredients.includes(index);
         });
       };
 

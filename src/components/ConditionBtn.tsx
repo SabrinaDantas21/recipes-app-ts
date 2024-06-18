@@ -1,18 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { ConditionButtonType, GlobalStoreType } from '../util/types';
+import { useNavigate } from 'react-router-dom';
+import { ConditionButtonType } from '../util/types';
 import Button from './Button';
 
 function ConditionBtn({ type, id }:ConditionButtonType) {
-  const location = useLocation();
   const [isRecipeDone, setIsRecipeDone] = useState(false);
   const [btnName, setBtnName] = useState('Start Recipe');
-  const [btnTestId, setBtnTestId] = useState('start-recipe-btn');
   const navigate = useNavigate();
-  const { ingredientChecks } = useSelector(
-    (state: GlobalStoreType) => state.updateRecipeInProgressReducer,
-  );
 
   useEffect(() => {
     const verifyLocalStorage = () => {
@@ -30,17 +24,9 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
       if (filterDoneRecipes) {
         setIsRecipeDone(true);
       }
-
-      if (location.pathname.includes('in-progress')) {
-        setBtnTestId('finish-recipe-btn');
-      }
-
+      console.log(filterDoneRecipes);
       if (filterInProgressRecipes) {
         setBtnName('Continue Recipe');
-      }
-
-      if (filterInProgressRecipes && location.pathname.includes('in-progress')) {
-        setBtnName('Finish Recipe');
       }
     };
     verifyLocalStorage();
@@ -61,27 +47,7 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
     localStorage.setItem('inProgressRecipes', JSON.stringify(updatedInProgressRecipes));
   };
 
-  const addToDoneRecipes = () => {
-    const doneRecipesLs = localStorage.getItem('doneRecipes');
-    const doneRecipes = doneRecipesLs
-      ? JSON.parse(doneRecipesLs) : { meals: {}, drinks: {} };
-
-    const updatedDoneRecipes = {
-      ...doneRecipes,
-      [type]: {
-        ...doneRecipes[type],
-        [id as string]: [],
-      },
-    };
-
-    localStorage.setItem('doneRecipes', JSON.stringify(updatedDoneRecipes));
-  };
-
   const handleClick = () => {
-    if (location.pathname.includes('/in-progress')) {
-      addToDoneRecipes();
-      location.pathname = '/done-recipes';
-    }
     addToInProgressRecipes();
     if (type === 'meals') {
       navigate(`/meals/${id}/in-progress`);
@@ -95,9 +61,8 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
       {!isRecipeDone && (
         <Button
           className="fixed-btn"
-          dataTestidBtn={ btnTestId }
+          dataTestidBtn="start-recipe-btn"
           onClick={ handleClick }
-          disabled={ !Object.values(ingredientChecks).every((check) => check === true) }
         >
           {btnName}
         </Button>

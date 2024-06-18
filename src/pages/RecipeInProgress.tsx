@@ -1,19 +1,41 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { DispatchType, GlobalStoreType } from '../util/types';
 import IngredientCheckbox from '../components/IngredientCheckbox';
 import { initializeRecipeInProgress } from '../redux/actions';
 import DetailsInteractiveBtns from '../components/DetailsInteractiveBtns';
-import ConditionBtn from '../components/ConditionBtn';
+import Button from '../components/Button';
 
 export default function RecipeInProgress() {
   const dispatch: DispatchType = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { recipe } = useSelector(
     (state: GlobalStoreType) => state.updateRecipeInProgressReducer,
   );
+  const { ingredientChecks } = useSelector(
+    (state: GlobalStoreType) => state.updateRecipeInProgressReducer,
+  );
+
+  const addToDoneRecipes = () => {
+    const doneRecipesLs = localStorage.getItem('doneRecipes') || '[]';
+    const doneRecipesObject = JSON.parse(doneRecipesLs);
+    const newRecipeObject = {
+      id: recipe.idMeal || recipe.idDrink,
+      type: location.pathname.includes('/meals') ? 'meal' : 'drink',
+      nationality: recipe.strArea || '',
+      category: recipe.strCategory || '',
+      alcoholicOrNot: recipe.strAlcoholic || '',
+      name: recipe.strMeal || recipe.strDrink,
+      image: recipe.strMealThumb || recipe.strDrinkThumb,
+      tags: recipe.strTags?.split(',') || [],
+      doneDate: new Date(),
+    };
+    localStorage
+      .setItem('doneRecipes', JSON.stringify([...doneRecipesObject, newRecipeObject]));
+  };
 
   useEffect(() => {
     if (location.pathname.includes('meals')) {
@@ -25,6 +47,11 @@ export default function RecipeInProgress() {
 
   const ingredientsList = Object.keys(recipe)
     .filter((key) => key.includes('Ingredient') && recipe[key]);
+
+  const handleClick = () => {
+    addToDoneRecipes();
+    navigate('/done-recipes');
+  };
 
   return (
     <>
@@ -73,10 +100,14 @@ export default function RecipeInProgress() {
       </ul>
       <h3>Instructions</h3>
       <p data-testid="instructions">{recipe.strInstructions}</p>
-      <ConditionBtn
-        type={ location.pathname.includes('meals') ? 'meals' : 'drinks' }
-        id={ id }
-      />
+
+      <Button
+        dataTestidBtn="finish-recipe-btn"
+        disabled={ !Object.values(ingredientChecks).every((check) => check === true) }
+        onClick={ handleClick }
+      >
+        Finish recipe
+      </Button>
     </>
   );
 }
