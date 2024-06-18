@@ -69,13 +69,14 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
       image: recipe.strMealThumb || recipe.strDrinkThumb,
       tags: recipe.strTags?.split(',') || [],
       doneDate: new Date().toLocaleDateString(),
+      url: location.pathname,
     };
     localStorage
       .setItem('doneRecipes', JSON.stringify([...doneRecipesObject, newRecipeObject]));
   };
 
   const handleClick = () => {
-    if (location.pathname.includes('/in-progress')) {
+    if (btnName === 'Finish Recipe') {
       return addToDoneRecipes();
     }
     addToInProgressRecipes();

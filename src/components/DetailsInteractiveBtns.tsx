@@ -4,7 +4,6 @@ import isntFavoriteBtn from '../images/whiteHeartIcon.svg';
 import isFavoriteBtn from '../images/blackHeartIcon.svg';
 import Button from './Button';
 import { FavoriteRecipesType, GlobalStoreType } from '../util/types';
-import ShareButton from './ShareButton';
 
 function DetailsInteractiveBtns() {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -58,7 +57,6 @@ function DetailsInteractiveBtns() {
 
   return (
     <div>
-      <ShareButton />
       {isFavorite === true ? (
         <Button
           dataTestid="favorite-btn"

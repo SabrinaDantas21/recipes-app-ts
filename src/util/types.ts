@@ -164,14 +164,15 @@ export type DrinkRecommendationType = {
 export type CardPropType = {
   index: number | undefined,
   isVisible?: boolean | undefined,
-  done: boolean | undefined,
+  done?: boolean | undefined,
   category?: string | undefined,
   date?: Date,
   key: string | undefined,
   img: string | undefined,
   title: string | undefined,
   tags?: Array<string>,
-  type: string,
+  type?: string,
+  url?: string,
 };
 export type FinishedRecipes = {
   id: string,
@@ -183,6 +184,7 @@ export type FinishedRecipes = {
   image: string,
   doneDate: Date,
   tags: Array<string>,
+  url: string,
 };
 
 export type ButtonType = {
@@ -206,7 +208,7 @@ export type DoneRecipeType = {
 export type ConditionButtonType = {
   type: string;
   id?: string;
-  url: string;
+  url?: string,
 };
 
 export type FavoriteRecipesType = {

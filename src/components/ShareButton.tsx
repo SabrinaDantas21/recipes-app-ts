@@ -2,9 +2,8 @@ import { useState } from 'react';
 import Button from './Button';
 import shareBtn from '../images/shareIcon.svg';
 
-function ShareButton({ dataTestidBtn = '' }) {
+function ShareButton({ dataTestidBtn = '', url = '' }) {
   const [msgIsVisible, setMsgIsVisible] = useState(false);
-  const url = window.location.href.toString();
 
   const readClipBoard = () => {
     navigator.clipboard.readText().then((clipText) => console.log(clipText));
@@ -12,7 +11,7 @@ function ShareButton({ dataTestidBtn = '' }) {
   const handleShareBtn = async () => {
     if (msgIsVisible === false) {
       setMsgIsVisible(true);
-      await navigator?.clipboard?.writeText(url);
+      await navigator.clipboard.writeText(url);
       readClipBoard();
     } else {
       setMsgIsVisible(false);
