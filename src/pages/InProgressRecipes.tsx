@@ -1,6 +1,9 @@
+import { useNavigate } from 'react-router-dom';
+
 function InProgressRecipes() {
+  const navigate = useNavigate();
   return (
-    <div>Hello world!</div>
+    <button onClick={ () => navigate('/done-recipes') }> oi</button>
   );
 }
 

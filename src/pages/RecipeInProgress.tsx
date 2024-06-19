@@ -6,12 +6,15 @@ import IngredientCheckbox from '../components/IngredientCheckbox';
 import { initializeRecipeInProgress } from '../redux/actions';
 import DetailsInteractiveBtns from '../components/DetailsInteractiveBtns';
 import Button from '../components/Button';
+import ShareButton from '../components/ShareButton';
 
 export default function RecipeInProgress() {
   const dispatch: DispatchType = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+  const formatedPath = location.pathname.slice(1, location.pathname.length - 12);
+
   const { recipe } = useSelector(
     (state: GlobalStoreType) => state.updateRecipeInProgressReducer,
   );
@@ -63,7 +66,7 @@ export default function RecipeInProgress() {
       <h1 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h1>
 
       <DetailsInteractiveBtns />
-
+      <ShareButton dataTestidBtn="share-btn" url={ `http://localhost:3000/${formatedPath}` } />
       <h3>
         Category
         <p data-testid="recipe-category">

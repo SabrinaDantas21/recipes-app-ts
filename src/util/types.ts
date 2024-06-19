@@ -72,6 +72,7 @@ export type FilterButtonsType = {
 };
 
 export type MealRecommendationType = {
+  finishDate?: string,
   idMeal: string,
   strArea: string,
   strCategory: string,
@@ -124,6 +125,7 @@ export type MealRecommendationType = {
 };
 
 export type DrinkRecommendationType = {
+  finishDate?: string,
   idDrink: string,
   strAlcoholic: string,
   strCategory: string,
@@ -178,7 +180,6 @@ export type CardPropType = {
   type?: string,
   id?: string,
 };
-
 export type FinishedRecipes = {
   id: string,
   type: string,
@@ -216,20 +217,14 @@ export type IngredientChecksType = {
 };
 
 export type DoneRecipeType = {
-  id: string;
-  type: string;
-  nationality: string;
-  category: string;
-  alcoholicOrNot: string;
-  name: string;
-  image: string;
-  doneDate: string;
-  tags: string;
+  drinks: object,
+  meals: object,
 };
 
 export type ConditionButtonType = {
   type: string;
   id?: string;
+  url?: string,
 };
 
 export type FavoriteRecipesType = {
