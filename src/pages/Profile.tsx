@@ -28,7 +28,7 @@ function Profile() {
     <>
       <Header />
       <h3 data-testid="profile-email">
-        {userObject.email}
+        {userObject?.email}
       </h3>
       <Button
         type="button"

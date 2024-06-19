@@ -7,9 +7,9 @@ import { DispatchType, GlobalStoreType, MealObjectType } from '../util/types';
 import ConditionBtn from './ConditionBtn';
 import { setAllDrinksList, setAllMealsList, setDetailedRecipe } from '../redux/actions';
 import './Button.css';
-import RecommendationCard from './RecommendationCard';
 import { getDrinksByFilter, getMealByFilter } from '../services/api';
 import DetailsInteractiveBtns from './DetailsInteractiveBtns';
+import RecipeCard from './RecipeCard';
 
 export default function RecipeDetails() {
   const location = useLocation();
@@ -155,7 +155,7 @@ export default function RecipeDetails() {
                 <div
                   key={ key }
                 >
-                  <RecommendationCard
+                  <RecipeCard
                     isVisible={ isVisible }
                     key={ key as string }
                     index={ index }

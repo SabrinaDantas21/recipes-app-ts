@@ -166,15 +166,30 @@ export type DrinkRecommendationType = {
 export type GenericRecommendationType = MealRecommendationType | DrinkRecommendationType;
 
 export type CardPropType = {
-  index: number,
-  isVisible: boolean,
-  key: string,
-  img: string,
-  title: string,
+  index: number | undefined,
+  isVisible?: boolean | undefined,
+  done?: boolean | undefined,
+  category?: string | undefined,
+  date?: Date,
+  key: string | undefined,
+  img: string | undefined,
+  title: string | undefined,
+  tags?: Array<string>,
+  type?: string,
+  id?: string,
 };
-export type AllRecipesListType = {
-  meals: MealRecommendationType,
-  drinks: DrinkObjectType,
+
+export type FinishedRecipes = {
+  id: string,
+  type: string,
+  nationality: string,
+  category: string,
+  alcoholicOrNot: string,
+  name: string,
+  image: string,
+  doneDate: Date,
+  tags: Array<string>,
+  url: string,
 };
 
 export type ButtonType = {
