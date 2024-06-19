@@ -17,8 +17,6 @@ export default function RecipeDetails() {
   const navigate = useNavigate();
   const dispatch: DispatchType = useDispatch();
 
-  console.log(location.pathname);
-
   const recipe = useSelector(
     (state: GlobalStoreType) => state.detailedRecipeReducer.recipe,
   );
