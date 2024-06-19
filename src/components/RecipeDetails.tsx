@@ -12,7 +12,6 @@ import DetailsInteractiveBtns from './DetailsInteractiveBtns';
 import RecipeCard from './RecipeCard';
 import ShareButton from './ShareButton';
 
-
 export default function RecipeDetails() {
   const location = useLocation();
   const navigate = useNavigate();
