@@ -24,7 +24,6 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
       if (filterDoneRecipes) {
         setIsRecipeDone(true);
       }
-      console.log(filterDoneRecipes);
       if (filterInProgressRecipes) {
         setBtnName('Continue Recipe');
       }

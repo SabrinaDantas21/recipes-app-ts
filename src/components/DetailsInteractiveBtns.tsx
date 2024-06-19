@@ -1,19 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
-import shareBtn from '../images/searchIcon.svg';
 import isntFavoriteBtn from '../images/whiteHeartIcon.svg';
 import isFavoriteBtn from '../images/blackHeartIcon.svg';
 import Button from './Button';
 import { FavoriteRecipesType, GlobalStoreType, MealObjectType } from '../util/types';
 
-const url = window.location.href;
-
 function DetailsInteractiveBtns() {
   const { id } = useParams<{ id: string }>();
 
   const { pathname } = useLocation();
-  const [msgIsVisible, setMsgIsVisible] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
   const recipe = useSelector(
@@ -23,17 +19,6 @@ function DetailsInteractiveBtns() {
   const recipeInProg = useSelector(
     (state: GlobalStoreType) => state.updateRecipeInProgressReducer.recipe,
   );
-
-  const handleShareBtn = async () => {
-    if (msgIsVisible === false) {
-      setMsgIsVisible(true);
-      await navigator.clipboard.writeText(
-        pathname.includes('meals') ? url.slice(0, 33) : url.slice(0, 35),
-      );
-    } else {
-      setMsgIsVisible(false);
-    }
-  };
 
   const handleFavoriteBtn = () => {
     const prevFavoriteList = JSON.parse(localStorage.getItem('favoriteRecipes') || '[]');
@@ -82,37 +67,21 @@ function DetailsInteractiveBtns() {
   }, []);
 
   return (
-    <>
-      <div>
+    <div>
+      {isFavorite ? (
         <Button
-          dataTestidBtn="share-btn"
-          onClick={ handleShareBtn }
-          src={ shareBtn }
+          dataTestid="favorite-btn"
+          onClick={ handleFavoriteBtn }
+          src={ isFavoriteBtn }
         />
-
-        {isFavorite ? (
-          <Button
-            dataTestid="favorite-btn"
-            onClick={ handleFavoriteBtn }
-            src={ isFavoriteBtn }
-          />
-        ) : (
-          <Button
-            dataTestid="favorite-btn"
-            onClick={ handleFavoriteBtn }
-            src={ isntFavoriteBtn }
-          />
-
-        )}
-      </div>
-      {msgIsVisible === true && (
-        <>
-          <p>Link copied!</p>
-          <Button text="fechar" onClick={ handleShareBtn } />
-        </>
+      ) : (
+        <Button
+          dataTestid="favorite-btn"
+          onClick={ handleFavoriteBtn }
+          src={ isntFavoriteBtn }
+        />
       )}
-    </>
+    </div>
   );
 }
-
 export default DetailsInteractiveBtns;
