@@ -18,8 +18,6 @@ function ShareButton({ dataTestidBtn = '', url = '' }) {
     }
   };
 
-  console.log(msgIsVisible);
-
   return (
     <>
       <Button

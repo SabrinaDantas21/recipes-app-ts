@@ -1,19 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
-import shareBtn from '../images/searchIcon.svg';
 import isntFavoriteBtn from '../images/whiteHeartIcon.svg';
 import isFavoriteBtn from '../images/blackHeartIcon.svg';
 import Button from './Button';
 import { FavoriteRecipesType, GlobalStoreType, MealObjectType } from '../util/types';
 
-const url = window.location.href;
-
 function DetailsInteractiveBtns() {
   const { id } = useParams<{ id: string }>();
 
   const { pathname } = useLocation();
-  const [msgIsVisible, setMsgIsVisible] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
   const recipe = useSelector(
