@@ -20,7 +20,7 @@ function Profile() {
       title: 'Profile',
       showSearchIcon: false,
     }));
-  }, [dispatch]);
+  }, []);
 
   const user = localStorage.getItem('user');
   const userObject = JSON.parse(user as string);
