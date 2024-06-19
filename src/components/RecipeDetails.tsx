@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { DispatchType, GlobalStoreType } from '../util/types';
+import { DispatchType, GlobalStoreType, MealObjectType } from '../util/types';
 import ConditionBtn from './ConditionBtn';
 import { setAllDrinksList, setAllMealsList, setDetailedRecipe } from '../redux/actions';
 import './Button.css';
@@ -24,7 +24,7 @@ export default function RecipeDetails() {
   const { id } = useParams<{ id: string }>();
 
   const [isMeal, setIsMeal] = useState(false);
-  const [recommendations, setRecommendations] = useState<object>([]);
+  const [recommendations, setRecommendations] = useState<MealObjectType[]>([]);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const type = isMeal ? 'meals' : 'drinks';
@@ -91,7 +91,7 @@ export default function RecipeDetails() {
       <h1 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h1>
 
       <DetailsInteractiveBtns />
-      <ShareButton dataTestidBtn="share-btn" />
+      <ShareButton dataTestidBtn="share-btn" url={ `http://localhost:3000${location.pathname}` } />
 
       <h3>
         Category
@@ -159,10 +159,10 @@ export default function RecipeDetails() {
                   <RecipeCard
                     done={ false }
                     isVisible={ isVisible }
-                    key={ key }
+                    key={ key as string }
                     index={ index }
-                    img={ img }
-                    title={ title }
+                    img={ img as string }
+                    title={ title as string }
                   />
                 </div>
               );

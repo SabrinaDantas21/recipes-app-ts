@@ -17,8 +17,10 @@ function DoneRecipes() {
     const recipes = localStorage.getItem('doneRecipes');
     if (recipes) {
       setFinishedRecipes(JSON.parse(recipes));
+      console.log(recipes);
     }
   };
+
   useEffect(() => {
     dispatch(setPage({
       title: 'Done Recipes',
@@ -55,8 +57,7 @@ function DoneRecipes() {
         onClick={ () => handleClick('drink') }
       />
       { finishedRecipes && finishedRecipes?.map((recipe, index) => {
-        const url = recipe?.url;
-        console.log(url);
+        const idRecipe = recipe.id;
         const tags = recipe?.tags;
         const done = true;
         const key = recipe.name;
@@ -69,7 +70,7 @@ function DoneRecipes() {
         const date = recipe.doneDate;
         return (
           <RecipeCard
-            url={ url }
+            id={ idRecipe }
             type={ type }
             tags={ tags }
             category={ category }

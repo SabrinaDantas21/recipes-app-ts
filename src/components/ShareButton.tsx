@@ -10,13 +10,15 @@ function ShareButton({ dataTestidBtn = '', url = '' }) {
   };
   const handleShareBtn = async () => {
     if (msgIsVisible === false) {
-      setMsgIsVisible(true);
       await navigator.clipboard.writeText(url);
+      setMsgIsVisible(true);
       readClipBoard();
     } else {
       setMsgIsVisible(false);
     }
   };
+
+  console.log(msgIsVisible);
 
   return (
     <>

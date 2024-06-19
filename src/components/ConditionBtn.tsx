@@ -1,17 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { ConditionButtonType, GlobalStoreType } from '../util/types';
+import { useNavigate } from 'react-router-dom';
+import { ConditionButtonType } from '../util/types';
 import Button from './Button';
 
 function ConditionBtn({ type, id }:ConditionButtonType) {
-  const location = useLocation();
   const [isRecipeDone, setIsRecipeDone] = useState(false);
   const [btnName, setBtnName] = useState('Start Recipe');
   const navigate = useNavigate();
-  const recipe = useSelector(
-    (state: GlobalStoreType) => state.detailedRecipeReducer.recipe,
-  );
 
   useEffect(() => {
     const verifyLocalStorage = () => {
@@ -22,23 +17,19 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
       const LsRecipes = Object.values(Object.values(doneRecipes));
       const LsRecipesDone = Object.values(Object.values(recipeStatus));
       const filterDoneRecipes = LsRecipes
-        .find((item) => Object.keys(item).includes(id));
+        .find((item) => Object.keys(item).includes(id as string));
       const filterInProgressRecipes = LsRecipesDone
-        .find((item) => Object.keys(item).includes(id));
+        .find((item) => Object.keys(item).includes(id as string));
 
       if (filterDoneRecipes) {
         setIsRecipeDone(true);
       }
-
       if (filterInProgressRecipes) {
         setBtnName('Continue Recipe');
       }
-      if (filterInProgressRecipes && location.pathname.includes('/in-progress')) {
-        setBtnName('Finish Recipe');
-      }
     };
     verifyLocalStorage();
-  }, [id, type, location.pathname]);
+  }, []);
 
   const addToInProgressRecipes = () => {
     const inProgressRecipesLs = localStorage.getItem('inProgressRecipes');
@@ -49,36 +40,13 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
       ...inProgressRecipes,
       [type]: {
         ...inProgressRecipes[type],
-        [id as string]: Object.keys(recipe).filter((key) => key
-          .includes('strIngredient') && recipe[key]),
+        [id as string]: [],
       },
     };
     localStorage.setItem('inProgressRecipes', JSON.stringify(updatedInProgressRecipes));
   };
 
-  const addToDoneRecipes = () => {
-    const doneRecipesLs = localStorage.getItem('doneRecipes') || '[]';
-    const doneRecipesObject = JSON.parse(doneRecipesLs);
-    const newRecipeObject = {
-      id: recipe.idMeal || recipe.idDrink,
-      type: location.pathname.includes('/meals') ? 'meal' : 'drink',
-      nationality: recipe.strArea || '',
-      category: recipe.strCategory || '',
-      alcoholicOrNot: recipe.strAlcoholic || '',
-      name: recipe.strMeal || recipe.strDrink,
-      image: recipe.strMealThumb || recipe.strDrinkThumb,
-      tags: recipe.strTags?.split(',') || [],
-      doneDate: new Date().toLocaleDateString(),
-      url: location.pathname,
-    };
-    localStorage
-      .setItem('doneRecipes', JSON.stringify([...doneRecipesObject, newRecipeObject]));
-  };
-
   const handleClick = () => {
-    if (btnName === 'Finish Recipe') {
-      return addToDoneRecipes();
-    }
     addToInProgressRecipes();
     if (type === 'meals') {
       navigate(`/meals/${id}/in-progress`);

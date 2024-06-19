@@ -48,6 +48,10 @@ export type GlobalStoreType = {
   detailedRecipeReducer: {
     recipe: MealObjectType;
   },
+  updateRecipeInProgressReducer: {
+    recipe: MealObjectType;
+    ingredientChecks: IngredientChecksType;
+  },
 };
 
 export type MenuRecipeCardPropsType = {
@@ -161,6 +165,8 @@ export type DrinkRecommendationType = {
   strMeasure15: string,
 };
 
+export type GenericRecommendationType = MealRecommendationType | DrinkRecommendationType;
+
 export type CardPropType = {
   index: number | undefined,
   isVisible?: boolean | undefined,
@@ -172,7 +178,7 @@ export type CardPropType = {
   title: string | undefined,
   tags?: Array<string>,
   type?: string,
-  url?: string,
+  id?: string,
 };
 export type FinishedRecipes = {
   id: string,
@@ -198,6 +204,16 @@ export type ButtonType = {
   disabled?: boolean
   text?: string
   className?: string
+};
+
+export type IngredientInputProps = {
+  recipe : MealObjectType;
+  ingredient: string;
+  index: number;
+};
+
+export type IngredientChecksType = {
+  [key: string]: boolean;
 };
 
 export type DoneRecipeType = {
