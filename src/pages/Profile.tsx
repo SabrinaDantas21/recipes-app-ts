@@ -27,9 +27,10 @@ function Profile() {
   return (
     <>
       <Header />
-      <h3 data-testid="profile-email">
-        {userObject?.email}
-      </h3>
+      { userObject?.email ? (
+        <h3 data-testid="profile-email">
+          {userObject?.email}
+        </h3>) : null}
       <Button
         type="button"
         dataTestidBtn="profile-done-btn"
