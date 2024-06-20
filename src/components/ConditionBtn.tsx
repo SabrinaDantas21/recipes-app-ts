@@ -21,8 +21,6 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
       const filterInProgressRecipes = LsRecipesDone
         .find((item) => Object.values(item).includes(id));
 
-      console.log(filterDoneRecipes);
-
       if (filterDoneRecipes) {
         setIsRecipeDone(true);
       }
