@@ -12,11 +12,14 @@ function DoneRecipes() {
   const dispatch = useDispatch();
   const [finishedRecipes,
     setFinishedRecipes] = useState<FinishedRecipes[]>();
+  const [originalFinishedRecipes,
+    setOriginalFinishedRecipes] = useState<FinishedRecipes[]>();
 
   const getFinishedRecipes = () => {
     const recipes = localStorage.getItem('doneRecipes');
     if (recipes) {
       setFinishedRecipes(JSON.parse(recipes));
+      setOriginalFinishedRecipes(JSON.parse(recipes));
     }
   };
 
@@ -30,7 +33,8 @@ function DoneRecipes() {
 
   const handleClick = (filter: string) => {
     if (filter !== '') {
-      const filtredRecipes = finishedRecipes?.filter((recipe) => recipe.type === filter);
+      const filtredRecipes = originalFinishedRecipes
+        ?.filter((recipe) => recipe.type === filter);
       return setFinishedRecipes(filtredRecipes);
     }
     return finishedRecipes;
