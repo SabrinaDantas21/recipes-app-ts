@@ -17,9 +17,11 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
       const LsRecipes = Object.values(Object.values(doneRecipes));
       const LsRecipesDone = Object.values(Object.values(recipeStatus));
       const filterDoneRecipes = LsRecipes
-        .find((item) => Object.keys(item).includes(id as string));
+        .find((item) => Object.values(item).includes(id));
       const filterInProgressRecipes = LsRecipesDone
-        .find((item) => Object.keys(item).includes(id as string));
+        .find((item) => Object.values(item).includes(id));
+
+      console.log(filterDoneRecipes);
 
       if (filterDoneRecipes) {
         setIsRecipeDone(true);

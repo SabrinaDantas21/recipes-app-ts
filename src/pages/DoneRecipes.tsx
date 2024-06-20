@@ -17,7 +17,6 @@ function DoneRecipes() {
     const recipes = localStorage.getItem('doneRecipes');
     if (recipes) {
       setFinishedRecipes(JSON.parse(recipes));
-      console.log(recipes);
     }
   };
 
