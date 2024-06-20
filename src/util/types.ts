@@ -48,6 +48,10 @@ export type GlobalStoreType = {
   detailedRecipeReducer: {
     recipe: MealObjectType;
   },
+  updateRecipeInProgressReducer: {
+    recipe: MealObjectType;
+    ingredientChecks: IngredientChecksType;
+  },
 };
 
 export type MenuRecipeCardPropsType = {
@@ -68,6 +72,7 @@ export type FilterButtonsType = {
 };
 
 export type MealRecommendationType = {
+  finishDate?: string,
   idMeal: string,
   strArea: string,
   strCategory: string,
@@ -120,6 +125,7 @@ export type MealRecommendationType = {
 };
 
 export type DrinkRecommendationType = {
+  finishDate?: string,
   idDrink: string,
   strAlcoholic: string,
   strCategory: string,
@@ -159,16 +165,32 @@ export type DrinkRecommendationType = {
   strMeasure15: string,
 };
 
+export type GenericRecommendationType = MealRecommendationType | DrinkRecommendationType;
+
 export type CardPropType = {
-  index: number,
-  isVisible: boolean,
-  key: string,
-  img: string,
-  title: string,
+  index: number | undefined,
+  isVisible?: boolean | undefined,
+  done?: boolean | undefined,
+  category?: string | undefined,
+  date?: Date,
+  key: string | undefined,
+  img: string | undefined,
+  title: string | undefined,
+  tags?: Array<string>,
+  type?: string,
+  id?: string,
 };
-export type AllRecipesListType = {
-  meals: MealRecommendationType,
-  drinks: DrinkObjectType,
+export type FinishedRecipes = {
+  id: string,
+  type: string,
+  nationality: string,
+  category: string,
+  alcoholicOrNot: string,
+  name: string,
+  image: string,
+  doneDate: Date,
+  tags: Array<string>,
+  url: string,
 };
 
 export type ButtonType = {
@@ -184,21 +206,25 @@ export type ButtonType = {
   className?: string
 };
 
+export type IngredientInputProps = {
+  recipe : MealObjectType;
+  ingredient: string;
+  index: number;
+};
+
+export type IngredientChecksType = {
+  [key: string]: boolean;
+};
+
 export type DoneRecipeType = {
-  id: string;
-  type: string;
-  nationality: string;
-  category: string;
-  alcoholicOrNot: string;
-  name: string;
-  image: string;
-  doneDate: string;
-  tags: string;
+  drinks: object,
+  meals: object,
 };
 
 export type ConditionButtonType = {
   type: string;
   id?: string;
+  url?: string,
 };
 
 export type FavoriteRecipesType = {
@@ -211,5 +237,5 @@ export type FavoriteRecipesType = {
   image: string
 };
 
-// -----------Tipagem do Thunk ----------- //
+/* -----------Tipagem do Thunk ----------- */
 export type DispatchType = ThunkDispatch<GlobalStoreType, unknown, AnyAction>;

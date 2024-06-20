@@ -1,48 +1,46 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import shareBtn from '../images/searchIcon.svg';
+import { useLocation, useParams } from 'react-router-dom';
 import isntFavoriteBtn from '../images/whiteHeartIcon.svg';
 import isFavoriteBtn from '../images/blackHeartIcon.svg';
 import Button from './Button';
-import { FavoriteRecipesType, GlobalStoreType } from '../util/types';
-
-const url = window.location.href;
+import { FavoriteRecipesType, GlobalStoreType, MealObjectType } from '../util/types';
 
 function DetailsInteractiveBtns() {
-  const [msgIsVisible, setMsgIsVisible] = useState(false);
+  const { id } = useParams<{ id: string }>();
+
+  const { pathname } = useLocation();
   const [isFavorite, setIsFavorite] = useState(false);
+
   const recipe = useSelector(
     (state: GlobalStoreType) => state.detailedRecipeReducer.recipe,
   );
 
-  const handleShareBtn = async () => {
-    if (msgIsVisible === false) {
-      setMsgIsVisible(true);
-      await navigator.clipboard.writeText(url);
-    } else {
-      setMsgIsVisible(false);
-    }
-  };
+  const recipeInProg = useSelector(
+    (state: GlobalStoreType) => state.updateRecipeInProgressReducer.recipe,
+  );
 
   const handleFavoriteBtn = () => {
     const prevFavoriteList = JSON.parse(localStorage.getItem('favoriteRecipes') || '[]');
 
+    const usedRecipe: MealObjectType = pathname.includes('in-progress')
+      ? { ...recipeInProg } : { ...recipe };
+
     const newRecipe = {
-      id: recipe.idMeal || recipe.idDrink,
-      type: recipe.strMeal ? 'meal' : 'drink',
-      nationality: recipe.strArea || '',
-      category: recipe.strCategory,
-      alcoholicOrNot: recipe.strMeal ? '' : recipe.strAlcoholic,
-      name: recipe.strMeal || recipe.strDrink,
-      image: recipe.strMealThumb || recipe.strDrinkThumb,
+      id: usedRecipe.idMeal || usedRecipe.idDrink,
+      type: usedRecipe.strMeal ? 'meal' : 'drink',
+      nationality: usedRecipe.strArea || '',
+      category: usedRecipe.strCategory,
+      alcoholicOrNot: usedRecipe.strMeal ? '' : usedRecipe.strAlcoholic,
+      name: usedRecipe.strMeal || usedRecipe.strDrink,
+      image: usedRecipe.strMealThumb || usedRecipe.strDrinkThumb,
     };
 
     const checkdata = prevFavoriteList
-      .find((item: FavoriteRecipesType) => item.id === newRecipe.id);
+      .find((item: FavoriteRecipesType) => item.id === id);
 
     const removedRecipe = prevFavoriteList
-      .filter((item: FavoriteRecipesType) => item.id !== newRecipe.id);
-
+      .filter((item: FavoriteRecipesType) => item.id !== id);
     if (checkdata) {
       localStorage.setItem('favoriteRecipes', JSON.stringify(removedRecipe));
       setIsFavorite(false);
@@ -58,7 +56,7 @@ function DetailsInteractiveBtns() {
       const favoritesList = JSON.parse(localStorage.getItem('favoriteRecipes') || '[]');
 
       const checkList = favoritesList
-        .find((item: FavoriteRecipesType) => item.id === recipe.idMeal || recipe.idDrink);
+        .find((item: FavoriteRecipesType) => item.id === id);
 
       if (checkList) {
         return setIsFavorite(true);
@@ -66,40 +64,24 @@ function DetailsInteractiveBtns() {
     };
 
     checkIfIsFavorite();
-  }, [handleFavoriteBtn]);
+  }, []);
 
   return (
-    <>
-      <div>
+    <div>
+      {isFavorite ? (
         <Button
-          dataTestidBtn="share-btn"
-          onClick={ handleShareBtn }
-          src={ shareBtn }
+          dataTestid="favorite-btn"
+          onClick={ handleFavoriteBtn }
+          src={ isFavoriteBtn }
         />
-
-        {isFavorite === true ? (
-          <Button
-            dataTestid="favorite-btn"
-            onClick={ handleFavoriteBtn }
-            src={ isFavoriteBtn }
-          />
-        ) : (
-          <Button
-            dataTestid="favorite-btn"
-            onClick={ handleFavoriteBtn }
-            src={ isntFavoriteBtn }
-          />
-
-        )}
-      </div>
-      {msgIsVisible === true && (
-        <>
-          <p>Link copied!</p>
-          <Button text="fechar" onClick={ handleShareBtn } />
-        </>
+      ) : (
+        <Button
+          dataTestid="favorite-btn"
+          onClick={ handleFavoriteBtn }
+          src={ isntFavoriteBtn }
+        />
       )}
-    </>
+    </div>
   );
 }
-
 export default DetailsInteractiveBtns;
