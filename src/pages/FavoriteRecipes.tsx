@@ -61,8 +61,6 @@ function FavoriteRecipes() {
         </Button>
         { favoriteRecipes && favoriteRecipes?.map((recipe, index) => {
           const idRecipe = recipe.id;
-          const tags = recipe?.tags;
-          const done = true;
           const key = recipe.name;
           const img = recipe.image;
           const title = recipe.name;
@@ -70,15 +68,11 @@ function FavoriteRecipes() {
           const category = recipe.alcoholicOrNot.includes('Alcoholic')
             ? `${recipe.category} - ${recipe.alcoholicOrNot}`
             : `${recipe.nationality} - ${recipe.category}`;
-          const date = recipe.doneDate;
           return (
             <FavoriteCard
               id={ idRecipe }
               type={ type }
-              tags={ tags }
               category={ category }
-              done={ done }
-              date={ date }
               key={ key }
               index={ index }
               img={ img }

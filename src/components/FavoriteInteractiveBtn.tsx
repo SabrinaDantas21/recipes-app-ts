@@ -3,10 +3,11 @@ import { useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 import isFavoriteBtn from '../images/blackHeartIcon.svg';
 import Button from './Button';
-import { FavoriteRecipesType, GlobalStoreType, MealObjectType } from '../util/types';
+import { FavoriteRecipesType, GlobalStoreType } from '../util/types';
 
 function FavoriteInteractivesBtn() {
   const { id } = useParams<{ id: string }>();
+  const [preveFavorite, setPrevFavorite] = useState();
 
   const { pathname } = useLocation();
   const [isFavorite, setIsFavorite] = useState(false);
