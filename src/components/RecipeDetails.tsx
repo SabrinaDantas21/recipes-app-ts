@@ -55,10 +55,6 @@ export default function RecipeDetails() {
     getRecommendations();
   }, []);
 
-  if (!recipe) {
-    return <p>Carregando detalhes da receita...</p>;
-  }
-
   const handleBeforeChange = (nextSlide: number) => {
     setCurrentSlide(nextSlide);
   };
