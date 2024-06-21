@@ -179,6 +179,7 @@ export type CardPropType = {
   tags?: Array<string>,
   type?: string,
   id?: string,
+  remove?: (itemId: string | undefined) => void
 };
 export type FinishedRecipes = {
   id: string,
