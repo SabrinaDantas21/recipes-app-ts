@@ -15,7 +15,7 @@ function FavoriteRecipes() {
   const getFavoriteRecipes = () => {
     const recipes = localStorage.getItem('favoriteRecipes');
     if (recipes) {
-      setFavoriteRecipes(JSON.parse(recipes));
+      return setFavoriteRecipes(JSON.parse(recipes));
     }
   };
 
@@ -29,25 +29,29 @@ function FavoriteRecipes() {
       .filter((item: FavoriteRecipesType) => item.id !== itemId);
 
     if (checkList) {
+      setFavoriteRecipes(removedRecipe);
       localStorage.setItem('favoriteRecipes', JSON.stringify(removedRecipe));
     }
   };
 
   const handleClick = (filter: string) => {
-    if (filter !== '') {
-      const filtredRecipes = favoriteRecipes?.filter((recipe) => recipe.type === filter);
-      return setFavoriteRecipes(filtredRecipes);
-    }
-    return favoriteRecipes;
+    const filtredRecipes = JSON.parse(localStorage.getItem('favoriteRecipes') || '[]');
+
+    const data = filtredRecipes.filter((recipe: any) => recipe.type === filter);
+    console.log(data);
+
+    return setFavoriteRecipes(data);
   };
 
   useEffect(() => {
+    console.log('entrou');
+
     dispatch(setPage({
       title: 'Favorite Recipes',
       showSearchIcon: false,
     }));
     getFavoriteRecipes();
-  }, [handleFavoriteBtn, handleClick]);
+  }, []);
 
   return (
     <>

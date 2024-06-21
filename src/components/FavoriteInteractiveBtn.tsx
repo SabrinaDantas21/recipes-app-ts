@@ -1,11 +1,10 @@
 import isFavoriteBtn from '../images/blackHeartIcon.svg';
 import Button from './Button';
-import { FavoriteRecipesType } from '../util/types';
 
 type RmvFavoriteType = {
   id: string | undefined
   remove: (itemId: string | undefined) => void
-  index: string
+  index: number | undefined
 };
 
 function FavoriteInteractivesBtn({ id, remove, index }: RmvFavoriteType) {
