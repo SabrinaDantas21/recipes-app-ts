@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import Button from '../components/Button';
 import drinkIcon from '../images/drinkIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
-import { FinishedRecipes } from '../util/types';
+import { FavoriteRecipesType, FinishedRecipes } from '../util/types';
 import FavoriteCard from '../components/FavoriteCard';
 
 function FavoriteRecipes() {
@@ -19,13 +19,19 @@ function FavoriteRecipes() {
     }
   };
 
-  useEffect(() => {
-    dispatch(setPage({
-      title: 'Favorite Recipes',
-      showSearchIcon: false,
-    }));
-    getFavoriteRecipes();
-  }, []);
+  const handleFavoriteBtn = (itemId: string) => {
+    const prevFavoriteList = JSON.parse(localStorage.getItem('favoriteRecipes') || '[]');
+
+    const checkList = prevFavoriteList
+      .find((item: FavoriteRecipesType) => item.id === itemId);
+
+    const removedRecipe = prevFavoriteList
+      .filter((item: FavoriteRecipesType) => item.id !== itemId);
+
+    if (checkList) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(removedRecipe));
+    }
+  };
 
   const handleClick = (filter: string) => {
     if (filter !== '') {
@@ -35,27 +41,35 @@ function FavoriteRecipes() {
     return favoriteRecipes;
   };
 
+  useEffect(() => {
+    dispatch(setPage({
+      title: 'Favorite Recipes',
+      showSearchIcon: false,
+    }));
+    getFavoriteRecipes();
+  }, [handleFavoriteBtn, handleClick]);
+
   return (
     <>
       <Header />
       <main>
         <Button
-          data-testid="filter-by-all-btn"
           onClick={ () => getFavoriteRecipes() }
+          dataTestidBtn="filter-by-all-btn"
         >
           All
         </Button>
         <Button
-          data-testid="filter-by-meal-btn"
           src={ mealIcon }
           onClick={ () => handleClick('meal') }
+          dataTestidBtn="filter-by-meal-btn"
         >
           Meals
         </Button>
         <Button
-          data-testid="filter-by-drink-btn"
           src={ drinkIcon }
           onClick={ () => handleClick('drink') }
+          dataTestidBtn="filter-by-drink-btn"
         >
           Drinks
         </Button>
@@ -77,6 +91,7 @@ function FavoriteRecipes() {
               index={ index }
               img={ img }
               title={ title }
+              remove={ handleFavoriteBtn }
             />
           );
         })}
