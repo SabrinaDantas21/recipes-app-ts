@@ -56,7 +56,7 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
   };
 
   return (
-    <div>
+    <div data-testid="start-recipe-btn-container">
       {!isRecipeDone && (
         <Button
           className="fixed-btn"

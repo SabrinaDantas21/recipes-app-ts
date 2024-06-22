@@ -129,7 +129,10 @@ export default function RecipeDetails() {
 
       <ConditionBtn type={ type } id={ id } />
 
-      <div style={ { width: '40%' } }>
+      <div
+        data-testid="carousel-container"
+        style={ { width: '40%' } }
+      >
         <Carousel
           swipeable={ false }
           draggable={ false }
