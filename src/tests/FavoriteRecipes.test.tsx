@@ -7,6 +7,7 @@ const favoritePageUrlConst = '/favorite-recipes';
 const item1Const = '0-recommendation-card';
 const item2Const = '1-recommendation-card';
 const item3Const = '2-recommendation-card';
+const item4Const = '3-recommendation-card';
 
 const favoriteLocalStorageMock = [
   {
@@ -47,18 +48,6 @@ const favoriteLocalStorageMock = [
   },
 ];
 
-// const alcoholicDrinkMock = [
-//   {
-//     alcoholicOrNot: 'Alcoholic',
-//     category: 'Shot',
-//     id: '15288',
-//     image: 'https://www.thecocktaildb.com/images/media/drink/rtpxqw1468877562.jpg',
-//     name: '252',
-//     nationality: '',
-//     type: 'drink',
-//   },
-// ];
-
 describe('Testa a pagina de receitas favoritas', () => {
   afterEach(() => {
     global.localStorage.clear();
@@ -71,7 +60,8 @@ describe('Testa a pagina de receitas favoritas', () => {
     const favoriteCard1 = screen.getByTestId(item1Const);
     const favoriteCard2 = screen.getByTestId(item2Const);
     const favoriteCard3 = screen.getByTestId(item3Const);
-    expect(favoriteCard1 && favoriteCard2 && favoriteCard3).toBeVisible();
+    const favoriteCard4 = screen.getByTestId(item4Const);
+    expect(favoriteCard1 && favoriteCard2 && favoriteCard3 && favoriteCard4).toBeVisible();
   });
 
   test('2. Testa se é possivel filtrar as receitas favoritas', async () => {
@@ -82,16 +72,17 @@ describe('Testa a pagina de receitas favoritas', () => {
     const favoriteCard1 = screen.getByTestId(item1Const);
     const favoriteCard2 = screen.getByTestId(item2Const);
     const favoriteCard3 = screen.getByTestId(item3Const);
-    expect(favoriteCard1 && favoriteCard2 && favoriteCard3).toBeVisible();
+    const favoriteCard4 = screen.getByTestId(item4Const);
+    expect(favoriteCard1 && favoriteCard2 && favoriteCard3 && favoriteCard4).toBeVisible();
 
     const drinksFilterBtn = screen.getByTestId('filter-by-drink-btn');
     await userEvent.click(drinksFilterBtn);
-    expect(favoriteCard3).toBeVisible();
+    expect(favoriteCard3 && favoriteCard4).toBeVisible();
     expect(favoriteCard1 && favoriteCard2).not.toBeVisible();
 
     const removeFilterBtn = screen.getByTestId('filter-by-all-btn');
     await userEvent.click(removeFilterBtn);
-    expect(favoriteCard1 && favoriteCard2 && favoriteCard3).toBeVisible();
+    expect(favoriteCard1 && favoriteCard2 && favoriteCard3 && favoriteCard4).toBeVisible();
   });
 
   test('3. Testa se é possivel remover algum item a partir da pagina de favoritos', async () => {
@@ -102,31 +93,26 @@ describe('Testa a pagina de receitas favoritas', () => {
     const favoriteCard1 = screen.getByTestId(item1Const);
     const favoriteCard2 = screen.getByTestId(item2Const);
     const favoriteCard3 = screen.getByTestId(item3Const);
-    expect(favoriteCard1 && favoriteCard2 && favoriteCard3).toBeVisible();
+    const favoriteCard4 = screen.getByTestId(item4Const);
+    expect(favoriteCard1 && favoriteCard2 && favoriteCard3 && favoriteCard4).toBeVisible();
 
-    const favoriteBtn1 = screen.getByTestId('0-horizontal-favorite-btn');
     const favoriteBtn2 = screen.getByTestId('1-horizontal-favorite-btn');
     const favoriteBtn3 = screen.getByTestId('2-horizontal-favorite-btn');
     await userEvent.click(favoriteBtn2);
-    expect(favoriteCard2).not.toBeInTheDocument();
-
-    await userEvent.click(favoriteBtn1);
     await userEvent.click(favoriteBtn3);
+    expect(favoriteCard2 && favoriteCard3).not.toBeInTheDocument();
+    expect(favoriteCard1 && favoriteCard4).toBeVisible();
+
+    const mealsFilterBtn = screen.getByTestId('filter-by-meal-btn');
+    await userEvent.click(mealsFilterBtn);
+
+    expect(favoriteCard1).toBeVisible();
+    expect(favoriteCard4).not.toBeVisible();
+
+    const drinksFilterBtn = screen.getByTestId('filter-by-drink-btn');
+    await userEvent.click(drinksFilterBtn);
+
+    const removeFilterBtn = screen.getByTestId('filter-by-all-btn');
+    await userEvent.click(removeFilterBtn);
   });
-
-  // test('4. Testa a renderização de uma bebida alcolica', async () => {
-  //   global.localStorage.setItem('favoriteRecipes', JSON.stringify(alcoholicDrinkMock));
-
-  //   renderWithRouterAndRedux(<App />, { initialEntries: [favoritePageUrlConst] });
-
-  //   const favoriteCard1 = screen.getByTestId(item1Const);
-  //   expect(favoriteCard1).toBeVisible();
-
-  //   const cardText = screen.getByTestId('0-horizontal-top-text');
-  //   expect(cardText).toHaveTextContent('Shot - Alcoholic');
-
-  //   const favoriteBtn = screen.getByTestId('0-horizontal-favorite-btn');
-  //   await userEvent.click(favoriteBtn);
-  //   expect(favoriteCard1).not.toBeInTheDocument();
-  // });
 });
