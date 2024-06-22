@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Button from '../components/Button';
-import Input from '../components/Input';
-import { setCredentials } from '../redux/actions';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
+import { setCredentials } from '../../redux/actions';
+import logo from './LoginPageLogo.svg';
+import './Login.css';
 
 function Login() {
   const dispatch = useDispatch();
@@ -40,32 +42,45 @@ function Login() {
   };
 
   return (
-    <form
-      onSubmit={ handleSubmit }
-    >
-      <Input
-        data-testid="email-input"
-        type="text"
-        placeholder="Email"
-        name="email"
-        onChange={ handleChange }
-        required
-      />
-      <Input
-        data-testid="password-input"
-        type="password"
-        placeholder="Password"
-        name="password"
-        onChange={ handleChange }
-        required
-      />
-      <Button
-        dataTestidBtn="login-submit-btn"
-        type="submit"
-        disabled={ on }
-        text="Enter"
-      />
-    </form>
+    <>
+      <div className="login-page-logo-container">
+        <img
+          className="login-page-logo"
+          src={ logo }
+          alt="login page logo"
+        />
+      </div>
+      <form
+        className="login-form-container"
+        onSubmit={ handleSubmit }
+      >
+        <Input
+          className="login-input"
+          data-testid="email-input"
+          type="text"
+          placeholder="Email"
+          name="email"
+          onChange={ handleChange }
+          required
+        />
+        <Input
+          className="login-input"
+          data-testid="password-input"
+          type="password"
+          placeholder="Password"
+          name="password"
+          onChange={ handleChange }
+          required
+        />
+        <Button
+          className="login-page-enter-btn"
+          dataTestidBtn="login-submit-btn"
+          type="submit"
+          disabled={ on }
+          text="Enter"
+        />
+      </form>
+    </>
   );
 }
 
