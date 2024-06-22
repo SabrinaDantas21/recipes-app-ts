@@ -101,3 +101,19 @@ export const getSingleDrinkRecipe = async (id: string) => {
   const data = await response.json();
   return data;
 };
+
+// logica carousel
+
+export const getMainRecipesList = async (page: 'Meals' | 'Drinks') => {
+  if (page === 'Meals') {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    const data = await response.json();
+    return data;
+  }
+
+  if (page === 'Drinks') {
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+    const data = await response.json();
+    return data;
+  }
+};

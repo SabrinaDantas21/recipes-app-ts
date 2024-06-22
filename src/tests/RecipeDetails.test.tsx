@@ -49,8 +49,11 @@ describe('Testa a pagina de detalhes de uma receita', () => {
     const mealImg = await screen.findByTestId('recipe-photo');
     expect(mealImg).toBeVisible();
 
-    const carousel = await screen.findByTestId('carousel-container');
-    expect(carousel).toBeVisible();
+    const carouselItem = await screen.findByTestId('0-recommendation-card');
+    expect(carouselItem).toBeVisible();
+
+    const carouselItemTitle = await screen.findByTestId('0-recommendation-title');
+    expect(carouselItemTitle).toBeVisible();
   });
 
   test('2. Testa se a pagina de detalhes de um drink é renderizada corretamente', async () => {

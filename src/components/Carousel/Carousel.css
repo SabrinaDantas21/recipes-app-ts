@@ -1,0 +1,7 @@
+.carousel-img-controll {
+  display: flex;
+}
+
+.carousel-img-controll img {
+  width: 11rem;
+}

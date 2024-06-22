@@ -83,6 +83,9 @@ describe('Testa a pagina de receitas favoritas', () => {
     const removeFilterBtn = screen.getByTestId('filter-by-all-btn');
     await userEvent.click(removeFilterBtn);
     expect(favoriteCard1 && favoriteCard2 && favoriteCard3 && favoriteCard4).toBeVisible();
+
+    const mealsFilterBtn = screen.getByTestId('filter-by-meal-btn');
+    await userEvent.click(mealsFilterBtn);
   });
 
   test('3. Testa se é possivel remover algum item a partir da pagina de favoritos', async () => {
@@ -107,12 +110,18 @@ describe('Testa a pagina de receitas favoritas', () => {
     await userEvent.click(mealsFilterBtn);
 
     expect(favoriteCard1).toBeVisible();
-    expect(favoriteCard4).not.toBeVisible();
+    expect(favoriteCard2).not.toBeVisible();
 
     const drinksFilterBtn = screen.getByTestId('filter-by-drink-btn');
     await userEvent.click(drinksFilterBtn);
 
     const removeFilterBtn = screen.getByTestId('filter-by-all-btn');
     await userEvent.click(removeFilterBtn);
+
+    const favoriteBtn1 = screen.getByTestId('0-horizontal-favorite-btn');
+    await userEvent.click(favoriteBtn1);
+    await userEvent.click(favoriteBtn2);
+
+    expect(favoriteCard1 && favoriteCard2 && favoriteCard3 && favoriteCard4).not.toBeInTheDocument();
   });
 });
