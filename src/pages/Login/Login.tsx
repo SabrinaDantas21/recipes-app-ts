@@ -42,7 +42,7 @@ function Login() {
   };
 
   return (
-    <>
+    <main className="page-back-ground">
       <div className="login-page-logo-container">
         <img
           className="login-page-logo"
@@ -80,7 +80,7 @@ function Login() {
           text="Enter"
         />
       </form>
-    </>
+    </main>
   );
 }
 

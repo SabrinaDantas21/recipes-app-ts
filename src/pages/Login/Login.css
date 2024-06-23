@@ -1,11 +1,16 @@
-body {
+.page-back-ground {
   background-color: #51165c;
+  height: 640px;
+  margin: 0;
+  padding: 0;
+  width: 360px;
 }
 
 .login-page-logo-container {
-  justify-content: center;
   display: flex;
-  margin: 5rem auto;
+  justify-content: center;
+  margin: 0 auto;
+  padding-top: 5rem;
   width: 80%;
 }
 
@@ -21,9 +26,9 @@ body {
   display: flex;
   flex-direction: column;
   height: 11rem;
-  justify-content: space-around; 
-  padding: 1rem 0;
+  justify-content: space-around;
   margin: 4rem auto;
+  padding: 1rem 0;
   width: 80%;
 }
 
@@ -40,16 +45,16 @@ body {
 
 .login-page-enter-btn:disabled {
   background-color: none;
-  border-radius: 8px;
   border: none;
+  border-radius: 8px;
   box-shadow: 0 0 8px #71a832;
   width: 70%;
 }
 
 .login-page-enter-btn:enabled {
   background-color: #5ea808;
-  border-radius: 8px;
   border: none;
+  border-radius: 8px;
   box-shadow: 0 0 8px #71a832;
   color: rgb(221, 221, 221);
   width: 70%;
