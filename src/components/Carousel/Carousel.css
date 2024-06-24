@@ -1,7 +1,8 @@
 .carousel-img-controll {
   display: flex;
+  max-width: 600px;
 }
 
 .carousel-img-controll img {
-  width: 11rem;
+  width: 100%;
 }
