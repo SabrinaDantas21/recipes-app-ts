@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { DispatchType, GlobalStoreType } from '../util/types';
-import IngredientCheckbox from '../components/IngredientCheckbox';
-import { initializeRecipeInProgress } from '../redux/actions';
-import DetailsInteractiveBtns from '../components/DetailsInteractiveBtns';
-import Button from '../components/Button';
-import ShareButton from '../components/ShareButton';
+import { DispatchType, GlobalStoreType } from '../../util/types';
+import IngredientCheckbox from '../../components/IngredientCheckbox/IngredientCheckbox';
+import { initializeRecipeInProgress } from '../../redux/actions';
+import DetailsInteractiveBtns from '../../components/DetailsInteractiveBtns';
+import Button from '../../components/Button/Button';
+import ShareButton from '../../components/ShareButton';
 
 export default function RecipeInProgress() {
   const dispatch: DispatchType = useDispatch();

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
-import isntFavoriteBtn from '../images/whiteHeartIcon.svg';
-import isFavoriteBtn from '../images/blackHeartIcon.svg';
-import Button from './Button';
-import { FavoriteRecipesType, GlobalStoreType, MealObjectType } from '../util/types';
+import isntFavoriteBtn from '../../images/whiteHeartIcon.svg';
+import isFavoriteBtn from '../../images/blackHeartIcon.svg';
+import Button from '../Button/Button';
+import { FavoriteRecipesType, GlobalStoreType, MealObjectType } from '../../util/types';
 
 function DetailsInteractiveBtns() {
   const { id } = useParams<{ id: string }>();

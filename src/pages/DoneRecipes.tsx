@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setPage } from '../redux/actions';
 import Header from '../components/Header';
-import Button from '../components/Button';
+import Button from '../components/Button/Button';
 import drinkIcon from '../images/drinkIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 import RecipeCard from '../components/RecipeCard';

@@ -5,7 +5,7 @@ import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 import SearchBar from './SearchBar';
 import { GlobalStoreType, SelectedPage } from '../util/types';
-import Button from './Button';
+import Button from './Button/Button';
 
 function Header({ page }: SelectedPage) {
   const { title,

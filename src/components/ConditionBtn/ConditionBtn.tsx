@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ConditionButtonType } from '../util/types';
-import Button from './Button';
+import { ConditionButtonType } from '../../util/types';
+import Button from '../Button/Button';
 
 function ConditionBtn({ type, id }:ConditionButtonType) {
   const [isRecipeDone, setIsRecipeDone] = useState(false);
@@ -19,7 +19,7 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
       const filterDoneRecipes = LsRecipes
         .find((item) => Object.values(item).includes(id));
       const filterInProgressRecipes = LsRecipesDone
-        .find((item) => Object.keys(item).includes(id));
+        .find((item) => Object.values(item).includes(id));
 
       if (filterDoneRecipes) {
         setIsRecipeDone(true);
