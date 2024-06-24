@@ -21,7 +21,7 @@
 .login-form-container {
   align-items: center;
   background-color: #a4db63;
-  border-radius: 25px;
+  border-radius: 10px;
   box-shadow: 1px 1px 25px rgba(30, 4, 63, 0.829);
   display: flex;
   flex-direction: column;
@@ -36,8 +36,8 @@
   background: none;
   border: none;
   border-radius: 25px;
-  box-shadow: inset 2px 5px 10px #588a1e;
-  color: #2c4114;
+  box-shadow: inset 1px 3px 10px #588a1e77;
+  color: #4d6d28;
   outline: none;
   padding: 0.1rem 0.8rem;
   width: 70%;
