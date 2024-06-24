@@ -1,8 +1,22 @@
 .carousel-img-controll {
   display: flex;
+  height: fit-content;
+  margin-bottom: 64px;
   max-width: 600px;
 }
 
-.carousel-img-controll img {
+.carousel-img-controll div img {
   width: 100%;
+  z-index: 0;
+}
+
+.carousel-img-controll > div > p {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  margin-left: 16px;
+  margin-top: -32px;
+  text-shadow: 1px 1px 8px black;
+  z-index: 100;
 }

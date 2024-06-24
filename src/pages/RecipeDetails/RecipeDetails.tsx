@@ -70,7 +70,7 @@ export default function RecipeDetails() {
 
       <div className="ingredients-container">
         <h3>Ingredients</h3>
-        <ul>
+        <ul className="ingredients-list">
           {Object.keys(recipe).filter((key) => key.includes('Ingredient') && recipe[key])
             .map((ingredient, index) => (
               <li key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>

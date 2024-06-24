@@ -3,6 +3,13 @@
   padding: 0;
 }
 
+.main-container h3 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  padding-left: 24px;
+}
+
 .recipe-deets-header {
   align-items: center;
   display: flex;
@@ -80,10 +87,21 @@
   padding: 24px 0 8px;
 }
 
-.ingredients-container ul {
+.ingredients-list {
   color: var(--nearBlack);
   line-height: 2em;
   list-style-image: url('../../images/mealsAndDrinksBullet.svg');
+}
+
+.ingredients-checklist {
+  color: var(--nearBlack);
+  line-height: 2em;
+  list-style: none;
+  margin-left: -24px;
+}
+
+.ingredients-checklist input {
+  margin-right: 8px;
 }
 
 .preview-video {

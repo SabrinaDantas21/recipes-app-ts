@@ -70,7 +70,6 @@ function RecomendationsCarousel({ page }: CarouselType) {
   }, []);
 
   useEffect(() => {
-    console.log('entrou');
     treatRecomendations();
   }, [recomendations]);
 
