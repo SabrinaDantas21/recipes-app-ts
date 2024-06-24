@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import Button from './Button/Button';
-import shareBtn from '../images/shareIcon.svg';
+import Button from '../Button/Button';
+import shareBtn from '../../images/shareIcon.svg';
+import closeBtn from '../../images/closeIcon.svg';
+import './ShareButton.css';
 
 function ShareButton({ dataTestidBtn = '', url = '' }) {
   const [msgIsVisible, setMsgIsVisible] = useState(false);
@@ -22,10 +24,13 @@ function ShareButton({ dataTestidBtn = '', url = '' }) {
         src={ shareBtn }
       />
       {msgIsVisible === true && (
-        <>
-          <p>Link copied!</p>
-          <Button text="fechar" onClick={ handleShareBtn } />
-        </>
+        <div className="copied-message-box">
+          <div className="lil-triangle" />
+          <div className="copied-message">
+            <p>Link copied!</p>
+            <Button src={ closeBtn } onClick={ handleShareBtn } />
+          </div>
+        </div>
       )}
     </>
   );

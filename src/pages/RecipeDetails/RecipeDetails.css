@@ -1,6 +1,10 @@
+.main-container {
+  box-sizing: border-box;
+  padding: 0;
+}
+
 .recipe-deets-header {
   align-items: center;
-  background-color: rgba(255, 255, 255, 0);
   display: flex;
   justify-content: space-between;
   margin-bottom: -80px;
@@ -16,46 +20,78 @@
 
 .recipe-deets-header h3 {
   color: white;
+  font-size: 20px;
   font-weight: 600;
+  letter-spacing: 1.5px;
   line-height: 1px;
   margin-bottom: 0;
   text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
 }
 
 .interactive-btns button {
+  align-items: center;
   background-color: rgba(255, 255, 255, 0.6);
   border: none;
   border-radius: 50px;
+  display: flex;
   height: 48px;
+  justify-content: center;
   margin-left: 8px;
-  padding: 12px;
+  margin-right: 0;
+  width: 48px;
 }
 
 .recipe-banner {
-  background-color: var(--primPurple);
-  height: 208px;
+  background-color: var(--nearBlack);
+  height: 264px;
   overflow: hidden;
 }
 
 .recipe-banner img {
-  opacity: 0.65;
+  opacity: 0.5;
   width: 100vw;
   z-index: 0;
 }
 
 .recipe-banner h1 {
   color: white;
-  font-size: 48px;
-  font-weight: 700;
+  font-size: 28px;
+  font-weight: 900;
   left: 0;
   letter-spacing: 4px;
-  margin-left: auto;
-  margin-right: auto;
+  line-height: 40px;
+  margin: 0 auto;
+  padding: 0 8px;
   position: absolute;
   right: 0;
   text-align: center;
-  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
   text-transform: uppercase;
-  top: 104px;
+  top: 120px;
   z-index: 10;
+}
+
+.ingredients-container {
+  padding: 24px;
+}
+
+.ingredients-container h3 {
+  font-weight: 700;
+  padding: 24px 0 8px;
+}
+
+.ingredients-container ul {
+  color: var(--nearBlack);
+  line-height: 2em;
+  list-style-image: url('../../images/mealsAndDrinksBullet.svg');
+}
+
+.preview-video {
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.preview-video iframe {
+  max-width: 600px;
+  width: 100%;
 }

@@ -10,7 +10,7 @@ import {
   setDetailedRecipe,
 } from '../../redux/actions';
 import DetailsInteractiveBtns from '../../components/DetailsInteractiveBtns';
-import ShareButton from '../../components/ShareButton';
+import ShareButton from '../../components/ShareButton/ShareButton';
 import RecomendationsCarousel from '../../components/Carousel/RecommendationsCarousel';
 import './RecipeDetails.css';
 
@@ -43,7 +43,7 @@ export default function RecipeDetails() {
   }, []);
 
   return (
-    <>
+    <div className="main-container">
       <div className="recipe-deets-header">
         <h3 data-testid="recipe-category">
           {recipe.strCategory}
@@ -68,8 +68,25 @@ export default function RecipeDetails() {
         </h1>
       </div>
 
+      <div className="ingredients-container">
+        <h3>Ingredients</h3>
+        <ul>
+          {Object.keys(recipe).filter((key) => key.includes('Ingredient') && recipe[key])
+            .map((ingredient, index) => (
+              <li key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
+                {recipe[ingredient]}
+                {' '}
+                -
+                {recipe[`strMeasure${ingredient.match(/\d+/)}`]}
+              </li>
+            ))}
+        </ul>
+        <h3>Instructions</h3>
+        <p data-testid="instructions">{recipe.strInstructions}</p>
+      </div>
+
       {isMeal ? (
-        <div>
+        <div className="preview-video">
           <iframe
             width="560"
             height="315"
@@ -85,20 +102,6 @@ export default function RecipeDetails() {
           </p>
         </h3>
       )}
-      <h3>Ingredients</h3>
-      <ul>
-        {Object.keys(recipe).filter((key) => key.includes('Ingredient') && recipe[key])
-          .map((ingredient, index) => (
-            <li key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
-              {recipe[ingredient]}
-              {' '}
-              -
-              {recipe[`strMeasure${ingredient.match(/\d+/)}`]}
-            </li>
-          ))}
-      </ul>
-      <h3>Instructions</h3>
-      <p data-testid="instructions">{recipe.strInstructions}</p>
 
       <ConditionBtn type={ type } id={ id } />
 
@@ -107,6 +110,6 @@ export default function RecipeDetails() {
       ) : (
         <RecomendationsCarousel page="Drinks" />
       )}
-    </>
+    </div>
   );
 }

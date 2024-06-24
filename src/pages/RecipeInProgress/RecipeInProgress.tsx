@@ -6,7 +6,7 @@ import IngredientCheckbox from '../../components/IngredientCheckbox/IngredientCh
 import { initializeRecipeInProgress } from '../../redux/actions';
 import DetailsInteractiveBtns from '../../components/DetailsInteractiveBtns';
 import Button from '../../components/Button/Button';
-import ShareButton from '../../components/ShareButton';
+import ShareButton from '../../components/ShareButton/ShareButton';
 
 export default function RecipeInProgress() {
   const dispatch: DispatchType = useDispatch();
