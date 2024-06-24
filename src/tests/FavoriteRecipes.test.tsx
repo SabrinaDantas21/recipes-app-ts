@@ -124,4 +124,10 @@ describe('Testa a pagina de receitas favoritas', () => {
 
     expect(favoriteCard1 && favoriteCard2 && favoriteCard3 && favoriteCard4).not.toBeInTheDocument();
   });
+
+  test('4. Testa pagina caso receba um array de favoritos vazio', async () => {
+    renderWithRouterAndRedux(<App />, { initialEntries: [favoritePageUrlConst] });
+
+    expect(global.localStorage.getItem('favoriteRecipes')).toBe(null);
+  });
 });
