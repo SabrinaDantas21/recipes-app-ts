@@ -19,28 +19,36 @@ function FavoriteRecipes() {
     }
   };
 
-  const handleFavoriteBtn = (itemId: string) => {
-    const prevFavoriteList = JSON.parse(localStorage.getItem('favoriteRecipes') || '[]');
+  const handleFavoriteBtn = (itemId: string | undefined) => {
+    const prevFavoriteList = localStorage.getItem('favoriteRecipes');
 
-    const checkList = prevFavoriteList
-      .find((item: FavoriteRecipesType) => item.id === itemId);
+    if (prevFavoriteList) {
+      const data = JSON.parse(prevFavoriteList);
 
-    const removedRecipe = prevFavoriteList
-      .filter((item: FavoriteRecipesType) => item.id !== itemId);
+      const checkList = data
+        .find((item: FavoriteRecipesType) => item.id === itemId);
 
-    if (checkList) {
-      setFavoriteRecipes(removedRecipe);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(removedRecipe));
+      const removedRecipe = data
+        .filter((item: FavoriteRecipesType) => item.id !== itemId);
+
+      if (checkList) {
+        setFavoriteRecipes(removedRecipe);
+        localStorage.setItem('favoriteRecipes', JSON.stringify(removedRecipe));
+      }
     }
   };
 
   const handleClick = (filter: string) => {
-    const filtredRecipes = JSON.parse(localStorage.getItem('favoriteRecipes') || '[]');
+    const filtredRecipes = localStorage.getItem('favoriteRecipes');
 
-    const data = filtredRecipes.filter((recipe: any) => recipe.type === filter);
-    console.log(data);
+    if (filtredRecipes) {
+      const prevData = JSON.parse(filtredRecipes);
 
-    return setFavoriteRecipes(data);
+      const data = prevData.filter((recipe: any) => recipe.type === filter);
+      console.log(data);
+
+      return setFavoriteRecipes(data);
+    }
   };
 
   useEffect(() => {

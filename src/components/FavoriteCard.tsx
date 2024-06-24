@@ -30,7 +30,7 @@ function FavoriteCard(prop: CardPropType) {
         </Card.Subtitle>
         <FavoriteInteractivesBtn
           id={ id }
-          remove={ remove }
+          remove={ remove as any }
           index={ index }
         />
         <ShareButton

@@ -3,7 +3,7 @@ import Button from './Button';
 
 type RmvFavoriteType = {
   id: string | undefined
-  remove: (itemId: string | undefined) => void
+  remove: (itemId: string | undefined) => void | undefined
   index: number | undefined
 };
 
