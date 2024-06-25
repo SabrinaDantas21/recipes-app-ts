@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setAllDrinksList, setPage } from '../redux/actions';
 import Recipes from '../components/Recipes';
 import { DispatchType } from '../util/types';
-import Header from '../components/Header';
+import Header from '../components/Header/Header';
 import Footer from '../components/Footer';
 
 function Drinks() {

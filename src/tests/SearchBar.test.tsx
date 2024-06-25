@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
-import SearchBar from '../components/SearchBar';
+import SearchBar from '../components/Header/SearchBar';
 
 const user = userEvent.setup();
 const nameRadioInputTestId = 'name-search-radio';
