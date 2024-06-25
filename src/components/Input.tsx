@@ -7,5 +7,4 @@ function Input(props: InputProps) {
     <input { ...props } />
   );
 }
-
 export default Input;

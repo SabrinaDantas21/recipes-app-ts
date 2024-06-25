@@ -1,0 +1,12 @@
+.footer-container {
+  background-color: var(--primPurple);
+  bottom: 0;
+  padding: 16px;
+  text-align: center;
+  width: 100%;
+}
+
+.bottom-buttons {
+  all: unset;
+  margin-right: 10px;
+}

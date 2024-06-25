@@ -1,0 +1,100 @@
+.header {
+  align-items: center;
+  background-color: var(--lightGreen);
+  display: flex;
+  flex-direction: row;
+  height: 70px;
+  justify-content: space-between;
+  padding-left: 5px;
+  top: 0;
+  width: 100%;
+}
+
+
+.div-title {
+  padding: 10px;
+  text-align: center;
+}
+
+.logo {
+  align-items: center;
+}
+
+.logo-name {
+  margin-left: 8px;
+}
+
+.search-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
+}
+
+.search-text-input {
+  border-color: aliceblue;
+  border-radius: 5px;
+  outline: 0;
+  width: inherit;
+}
+
+.filter-btn-container {
+  background-color: var(--primPurple);
+  border-radius: 5px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  color: aliceblue;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 10px;
+  width: inherit;
+}
+
+.search-radio-btn-input {
+  accent-color: #a4db63;
+  margin-right: 5px;
+}
+
+.radio-btn-group {
+  display: flex;
+}
+
+.radio-btn {
+  align-items: center;
+  display: flex;
+  margin: 0 8px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-search {
+  background-color: var(--lightGreen);
+  border-color: var(--lightGreen);
+  color: black;
+  font-weight: 700;
+  width: inherit;
+
+  --bs-btn-hover-bg: var(--lightGreen);
+
+  --bs-btn-hover-border-color: var(--lightGreen);
+
+  --bs-btn-active-border-color: var(--lightGreen);
+
+  --bs-btn-active-bg: var(--lightGreen);
+}
+
+.btn-search:active {
+  background-color: var(--lightGreen);
+  border-color: var(--lightGreen);
+}
+
+.bottom-buttons {
+  all: unset;
+  margin-right: 10px;
+}
