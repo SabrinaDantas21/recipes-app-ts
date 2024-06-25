@@ -1,0 +1,23 @@
+.category-btns-container {
+  align-items: start;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: auto;
+  width: 75%;
+}
+
+.category-btns-container button {
+  all: unset;
+}
+
+.category-btns-container img {
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.category-btns-container img:hover {
+  transform: scale(1.25);
+  transition-duration: 300ms;
+  transition-timing-function: 1s ease-in-out-out;
+}

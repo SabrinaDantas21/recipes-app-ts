@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getFiltersList } from '../services/api';
-import { DispatchType, FilterButtonsType, SingleFilterType } from '../util/types';
-import { setAllDrinksList, setAllMealsList } from '../redux/actions';
+import { getFiltersList } from '../../services/api';
+import { DispatchType, FilterButtonsType, SingleFilterType } from '../../util/types';
+import { setAllDrinksList, setAllMealsList } from '../../redux/actions';
+import { drinkImages, mealImages, allFilterImages } from './typos';
+import './FilterButtons.css';
 
 function FilterButtons({ page, setActiveFilter, activeFilter }: FilterButtonsType) {
   const dispatch: DispatchType = useDispatch();
@@ -47,27 +49,40 @@ function FilterButtons({ page, setActiveFilter, activeFilter }: FilterButtonsTyp
     }
   };
 
+  const allUrl = page === 'meals' ? allFilterImages[0] : allFilterImages[1];
+
   return (
-    <>
-      <h1>filtros</h1>
-      { currentFilters.length > 0 && (
-        currentFilters.slice(0, 5).map((filter, index) => (
-          <button
-            key={ index }
-            data-testid={ `${filter.strCategory}-category-filter` }
-            onClick={ () => handleClick(filter.strCategory) }
-          >
-            {filter.strCategory}
-          </button>
-        ))
+    <div className="category-btns-container">
+      {currentFilters.length > 0 && (
+        currentFilters.slice(0, 5).map((filter, index) => {
+          const imageUrl = page === 'meals' ? mealImages[index] : drinkImages[index];
+
+          return (
+            <button
+              key={ index }
+              data-testid={ `${filter.strCategory}-category-filter`.toLowerCase() }
+              onClick={ () => handleClick(filter.strCategory) }
+            >
+              <img
+                src={ imageUrl }
+                alt={ filter.strCategory }
+              />
+              {/* {filter.strCategory} */}
+            </button>
+          );
+        })
       )}
       <button
         data-testid="All-category-filter"
         onClick={ () => handleClick(activeFilter) }
       >
-        All
+        <img
+          className=""
+          src={ allUrl }
+          alt="All Filter Button Logo"
+        />
       </button>
-    </>
+    </div>
   );
 }
 
