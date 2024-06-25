@@ -1,12 +1,6 @@
 footer {
+  background-color: #4c2d51;
   bottom: 0;
+  text-align: center;
   width: 100%;
-  background-color:#4c2d51;
-  text-align:center;
-}
-
-btn {
-  bottom: 0;
-  position: fixed;
-  z-index: 100;
 }

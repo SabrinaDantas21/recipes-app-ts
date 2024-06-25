@@ -51,40 +51,42 @@ function SearchBar({ page }: SelectedPage) {
       />
       <div className="filter-btn-container">
         <div className="radio-btn-group">
-          <Input
-            data-testid="ingredient-search-radio"
-            className="search-radio-btn-input"
-            id="ingredient-radio"
-            type="radio"
-            name="radioBtnValue"
-            onChange={ handleChange }
-            value="ingredient-radio"
-          />
-          <label htmlFor="ingredient-radio">Ingredient</label>
-        </div>
-        <div className="radio-btn-group">
-          <Input
-            data-testid="name-search-radio"
-            className="search-radio-btn-input"
-            id="name-radio"
-            type="radio"
-            name="radioBtnValue"
-            onChange={ handleChange }
-            value="name-radio"
-          />
-          <label htmlFor="name-radio">Name</label>
-        </div>
-        <div className="radio-btn-group">
-          <Input
-            data-testid="first-letter-search-radio"
-            className="search-radio-btn-input"
-            id="first-letter-radio"
-            type="radio"
-            name="radioBtnValue"
-            onChange={ handleChange }
-            value="first-letter-radio"
-          />
-          <label htmlFor="first-letter-radio">First letter</label>
+          <div className="radio-btn">
+            <Input
+              data-testid="ingredient-search-radio"
+              className="search-radio-btn-input"
+              id="ingredient-radio"
+              type="radio"
+              name="radioBtnValue"
+              onChange={ handleChange }
+              value="ingredient-radio"
+            />
+            <label htmlFor="ingredient-radio">Ingredient</label>
+          </div>
+          <div className="radio-btn">
+            <Input
+              data-testid="name-search-radio"
+              className="search-radio-btn-input"
+              id="name-radio"
+              type="radio"
+              name="radioBtnValue"
+              onChange={ handleChange }
+              value="name-radio"
+            />
+            <label htmlFor="name-radio">Name</label>
+          </div>
+          <div className="radio-btn">
+            <Input
+              data-testid="first-letter-search-radio"
+              className="search-radio-btn-input"
+              id="first-letter-radio"
+              type="radio"
+              name="radioBtnValue"
+              onChange={ handleChange }
+              value="first-letter-radio"
+            />
+            <label htmlFor="first-letter-radio">First letter</label>
+          </div>
         </div>
         <div className="btn-container">
           <Button
