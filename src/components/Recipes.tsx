@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { GlobalStoreType } from '../util/types';
 import MenuRecipeCard from './MenuRecipeCard';
-import FilterButtons from './FilterButtons';
+import FilterButtons from './FilterButtons/FilterButtons';
 
 export default function Recipes() {
   const location = useLocation();
@@ -35,7 +35,7 @@ export default function Recipes() {
             setActiveFilter={ setActiveFilter }
           />}
       </div>
-      <div>
+      <div className="cards-container">
         { location.pathname === '/meals' && filteredRecipeList()
           .map(({ strMeal, strMealThumb, idMeal }, index) => (
             <MenuRecipeCard
