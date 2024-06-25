@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setPage } from '../redux/actions';
-import Header from '../components/Header/Header';
-import Button from '../components/Button/Button';
-import drinkIcon from '../images/drinkIcon.svg';
-import mealIcon from '../images/mealIcon.svg';
-import { FavoriteRecipesType, FinishedRecipes } from '../util/types';
-import FavoriteCard from '../components/FavoriteCard';
+import { setPage } from '../../redux/actions';
+import Header from '../../components/Header/Header';
+import Button from '../../components/Button/Button';
+import drinkIcon from '../../images/drinksfilterDrink.svg';
+import mealIcon from '../../images/foodsfilterFood.svg';
+import allIcon from '../../images/AllfilterAll.svg';
+import { FavoriteRecipesType, FinishedRecipes } from '../../util/types';
+import FavoriteCard from '../../components/FavoriteCard';
+import './FavoriteRecipes.css';
 
 function FavoriteRecipes() {
   const dispatch = useDispatch();
@@ -66,12 +68,15 @@ function FavoriteRecipes() {
       <Header />
       <main>
         <Button
+          className="filter-btn"
+          src={ allIcon }
           onClick={ () => getFavoriteRecipes() }
           dataTestidBtn="filter-by-all-btn"
         >
           All
         </Button>
         <Button
+          className="filter-btn"
           src={ mealIcon }
           onClick={ () => handleClick('meal') }
           dataTestidBtn="filter-by-meal-btn"
@@ -79,13 +84,14 @@ function FavoriteRecipes() {
           Meals
         </Button>
         <Button
+          className="filter-btn"
           src={ drinkIcon }
           onClick={ () => handleClick('drink') }
           dataTestidBtn="filter-by-drink-btn"
         >
           Drinks
         </Button>
-        { favoriteRecipes && favoriteRecipes?.map((recipe, index) => {
+        {favoriteRecipes && favoriteRecipes?.map((recipe, index) => {
           const idRecipe = recipe.id;
           const key = recipe.name;
           const img = recipe.image;
