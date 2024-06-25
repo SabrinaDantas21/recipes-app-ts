@@ -1,5 +1,5 @@
-import isFavoriteBtn from '../images/blackHeartIcon.svg';
-import Button from './Button';
+import isFavoriteBtn from '../../images/blackHeartIcon.svg';
+import Button from '../Button/Button';
 
 type RmvFavoriteType = {
   id: string | undefined

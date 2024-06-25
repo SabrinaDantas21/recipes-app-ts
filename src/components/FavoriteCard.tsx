@@ -1,8 +1,8 @@
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
 import { CardPropType } from '../util/types';
-import ShareButton from './ShareButton';
-import FavoriteInteractivesBtn from './FavoriteInteractiveBtn';
+import ShareButton from './ShareButton/ShareButton';
+import FavoriteInteractivesBtn from './FavoriteInteractiveBtn/FavoriteInteractiveBtn';
 
 function FavoriteCard(prop: CardPropType) {
   const navigate = useNavigate();

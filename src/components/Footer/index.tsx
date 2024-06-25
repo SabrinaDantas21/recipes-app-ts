@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import drinkIcon from '../../images/drinkIcon.svg';
 import mealIcon from '../../images/mealIcon.svg';
 import styles from './Footer.module.css';
-import Button from '../Button';
+import Button from '../Button/Button';
 
 function Footer() {
   const navigate = useNavigate();

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setPage } from '../redux/actions';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Button from '../components/Button';
+import Button from '../components/Button/Button';
 
 function Profile() {
   const dispatch = useDispatch();

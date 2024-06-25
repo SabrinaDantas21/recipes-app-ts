@@ -1,7 +1,7 @@
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
 import { CardPropType } from '../util/types';
-import ShareButton from './ShareButton';
+import ShareButton from './ShareButton/ShareButton';
 
 function RecipeCard(prop: CardPropType) {
   const navigate = useNavigate();

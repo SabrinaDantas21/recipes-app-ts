@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../components/Button';
+
+import Button from '../../components/Button/Button';
 import Input from '../../components/Input';
 import { setCredentials } from '../../redux/actions';
 import logo from './LoginPageLogo.svg';
