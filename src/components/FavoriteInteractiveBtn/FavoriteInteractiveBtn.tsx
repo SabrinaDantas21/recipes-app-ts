@@ -1,9 +1,9 @@
-import isFavoriteBtn from '../images/blackHeartIcon.svg';
-import Button from './Button';
+import isFavoriteBtn from '../../images/blackHeartIcon.svg';
+import Button from '../Button/Button';
 
 type RmvFavoriteType = {
   id: string | undefined
-  remove: (itemId: string | undefined) => void
+  remove: (itemId: string | undefined) => void | undefined
   index: number | undefined
 };
 

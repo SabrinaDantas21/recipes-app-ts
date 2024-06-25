@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
-import { GlobalStoreType, IngredientInputProps } from '../util/types';
+import { GlobalStoreType, IngredientInputProps } from '../../util/types';
 import './IngredientCheckbox.css';
-import { setIngredientChecks } from '../redux/actions';
+import { setIngredientChecks } from '../../redux/actions';
 
 export default function IngredientCheckbox(
   { recipe, ingredient, index }: IngredientInputProps,

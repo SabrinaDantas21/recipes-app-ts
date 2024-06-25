@@ -4,15 +4,13 @@ import { useState } from 'react';
 import searchIcon from '../../images/searchIcon.svg';
 import profileIcon from '../../images/profileIcon.svg';
 import darkMealIcon from '../../images/darkMealIcon.svg';
-import appName from '../../images/appName.svg';
-import logo from '../../images/logo.svg';
-import iconName from '../../images/iconName.svg';
+import logoName from '../../images/logoName.svg';
+import logoIcon from '../../images/logoIcon.svg';
 import darkDrinkIcon from '../../images/darkDrinkIcon.svg';
 import './Header.css';
-import btn from '../Button.css';
 import SearchBar from './SearchBar';
 import { GlobalStoreType, SelectedPage } from '../../util/types';
-import Button from '../Button';
+import Button from '../Button/Button';
 
 function Header({ page }: SelectedPage) {
   const { title,
@@ -53,24 +51,23 @@ function Header({ page }: SelectedPage) {
   return (
     <>
       <header className="header">
-        <div>
-          <img src={ logo } alt="logo Icon" />
-          <img src={ iconName } alt="app name" />
-          <img src={ appName } alt="app name" />
+        <div className="logo">
+          <img src={ logoIcon } alt="logo Icon" />
+          <img src={ logoName } alt="app name" className="logo-name" />
         </div>
         <div>
           {showSearchIcon && (
             <div>
               <Button
                 dataTestid="profile-top-btn"
-                className={ btn }
+                className="bottom-buttons"
                 onClick={ handleClick }
                 src={ profileIcon }
                 alt="Profile Icon"
               />
               <Button
                 dataTestid="search-top-btn"
-                className={ btn }
+                className="bottom-buttons "
                 onClick={ handleSearchClick }
                 src={ searchIcon }
                 alt="Search Icon"

@@ -1,4 +1,4 @@
-import { ButtonType } from '../util/types';
+import { ButtonType } from '../../util/types';
 import './Button.css';
 
 function Button({

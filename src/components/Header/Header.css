@@ -1,18 +1,27 @@
 .header {
-  align-items: baseline;
-  background-color: #a4db63;
+  align-items: center;
+  background-color: var(--lightGreen);
   display: flex;
   flex-direction: row;
-  height: 50px;
+  height: 70px;
   justify-content: space-between;
   padding-left: 5px;
   top: 0;
   width: 100%;
 }
 
+
 .div-title {
   padding: 10px;
   text-align: center;
+}
+
+.logo {
+  align-items: center;
+}
+
+.logo-name {
+  margin-left: 8px;
 }
 
 .search-container {
@@ -31,7 +40,7 @@
 }
 
 .filter-btn-container {
-  background-color: #4c2d51;
+  background-color: var(--primPurple);
   border-radius: 5px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -65,22 +74,27 @@
 }
 
 .btn-search {
-  background-color: #a4db63;
-  border-color: #a4db63;
+  background-color: var(--lightGreen);
+  border-color: var(--lightGreen);
   color: black;
   font-weight: 700;
   width: inherit;
 
-  --bs-btn-hover-bg: #a4db63;
+  --bs-btn-hover-bg: var(--lightGreen);
 
-  --bs-btn-hover-border-color: #a4db63;
+  --bs-btn-hover-border-color: var(--lightGreen);
 
-  --bs-btn-active-border-color: #a4db63;
+  --bs-btn-active-border-color: var(--lightGreen);
 
-  --bs-btn-active-bg: #a4db63;
+  --bs-btn-active-bg: var(--lightGreen);
 }
 
 .btn-search:active {
-  background-color: #a4db63;
-  border-color: #a4db63;
+  background-color: var(--lightGreen);
+  border-color: var(--lightGreen);
+}
+
+.bottom-buttons {
+  all: unset;
+  margin-right: 10px;
 }

@@ -1,0 +1,16 @@
+.start-recipe-btn button {
+  background-color: var(--secGreen);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-weight: 700;
+  margin: 0 5%;
+  padding: 10px 24px;
+  transition-duration: 0.2s;
+  width: 90%;
+}
+
+.start-recipe-btn button:hover {
+  background-color: var(--lightGreen);
+  color: var(--nearBlack);
+}

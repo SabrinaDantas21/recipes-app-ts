@@ -1,0 +1,117 @@
+.main-container {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.main-container h3 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  padding-left: 24px;
+}
+
+.recipe-deets-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: -80px;
+  padding: 16px 24px;
+  width: 100vw;
+}
+
+.recipe-deets-header h3, .interactive-btns {
+  align-items: center;
+  display: flex;
+  z-index: 100;
+}
+
+.recipe-deets-header h3 {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  line-height: 1px;
+  margin-bottom: 0;
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+.interactive-btns button {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: none;
+  border-radius: 50px;
+  display: flex;
+  height: 48px;
+  justify-content: center;
+  margin-left: 8px;
+  margin-right: 0;
+  width: 48px;
+}
+
+.recipe-banner {
+  background-color: var(--nearBlack);
+  height: 264px;
+  overflow: hidden;
+}
+
+.recipe-banner img {
+  opacity: 0.5;
+  width: 100vw;
+  z-index: 0;
+}
+
+.recipe-banner h1 {
+  color: white;
+  font-size: 28px;
+  font-weight: 900;
+  left: 0;
+  letter-spacing: 4px;
+  line-height: 40px;
+  margin: 0 auto;
+  padding: 0 8px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  top: 120px;
+  z-index: 10;
+}
+
+.ingredients-container {
+  padding: 24px;
+}
+
+.ingredients-container h3 {
+  font-weight: 700;
+  padding: 24px 0 8px;
+}
+
+.ingredients-list {
+  color: var(--nearBlack);
+  line-height: 2em;
+  list-style-image: url('../../images/mealsAndDrinksBullet.svg');
+}
+
+.ingredients-checklist {
+  color: var(--nearBlack);
+  line-height: 2em;
+  list-style: none;
+  margin-left: -24px;
+}
+
+.ingredients-checklist input {
+  margin-right: 8px;
+}
+
+.preview-video {
+  margin: 0 auto 36px;
+  padding: 0 16px;
+}
+
+.preview-video iframe {
+  border-radius: 8px;
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.5);
+  max-width: 600px;
+  width: 100%;
+}

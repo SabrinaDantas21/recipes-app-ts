@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ConditionButtonType } from '../util/types';
-import Button from './Button';
+import { ConditionButtonType } from '../../util/types';
+import Button from '../Button/Button';
+import './ConditionBtn.css';
 
 function ConditionBtn({ type, id }:ConditionButtonType) {
   const [isRecipeDone, setIsRecipeDone] = useState(false);
@@ -56,7 +57,10 @@ function ConditionBtn({ type, id }:ConditionButtonType) {
   };
 
   return (
-    <div data-testid="start-recipe-btn-container">
+    <div
+      className="start-recipe-btn"
+      data-testid="start-recipe-btn-container"
+    >
       {!isRecipeDone && (
         <Button
           className="fixed-btn"
