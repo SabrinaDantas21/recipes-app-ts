@@ -1,0 +1,49 @@
+.page-back-ground-profile {
+  align-items: center;
+  background-color: white;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin: 5rem 0;
+  min-height: calc(100vh - 60px);
+  padding: 20px;
+}
+
+.email-profile {
+  color: var(--primPurple);
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.button-page-login {
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  color: var(--secGreen);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: large;
+  gap: 10px;
+  justify-content: center;
+  padding: 8px 20px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.button-page-login:nth-child( 4 ):after {
+  display: none;
+}
+
+@media ( max-width : 480px ) {
+
+  .page-back-ground-profile {
+    padding: 10px;
+    width: 100%;
+  }
+
+  .button-page-login {
+    width: 100%;
+  }
+}

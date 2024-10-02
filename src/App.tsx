@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Meals from './pages/Meals';
 import Drinks from './pages/Drinks';
-import Profile from './pages/Profile';
+import Profile from './pages/Profile/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes/FavoriteRecipes';
 import RecipeDetails from './pages/RecipeDetails/RecipeDetails';
